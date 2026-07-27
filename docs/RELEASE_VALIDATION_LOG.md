@@ -1,9 +1,24 @@
 # Release validation log
 
+## Ancla de código (P0-1 cerrado)
+
+| Campo | Valor |
+|-------|--------|
+| Commit | `2f4fb71` (`2f4fb711e0a3849c132bf41ce44c2fb4608376ca`) |
+| Mensaje | chore(release): anclar árbol de Fases 0-9 en 1.0.0-rc.1 |
+| VERSION | 1.0.0-rc.1 (sin cambio) |
+| Tags | ninguna |
+| Unit tests post P0-2 | **75 passed** |
+| `--health` Vision | `degraded` cuando faltan llava/tesseract |
+
+Re-ejecutar `./scripts/release_validate.sh` y regenerar DMG **desde este hash** antes del Mac limpio.
+
+---
+
 | Campo | Valor |
 |-------|--------|
 | Fecha UTC | 2026-07-27T22:11:13Z |
-| VersiÃ³n | 1.0.0-rc.1 |
+| Versión | 1.0.0-rc.1 |
 | PASS | 17 |
 | WARN | 1 |
 | FAIL | 0 |
