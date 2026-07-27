@@ -11,11 +11,11 @@ import sounddevice as sd
 
 WEBHOOK_URL = "http://localhost:5678/webhook/jarvis"
 KOKORO_MODEL = "mlx-community/Kokoro-82M-bf16"
-KOKORO_VOZ = "em_alex"
+KOKORO_VOZ = "em_santa"
 MODELO_WHISPER = "small"
 SAMPLE_RATE = 16000
 CHUNK = 1280              # 80 ms por bloque
-UMBRAL_WAKE = 0.6         # confianza minima de la palabra clave
+UMBRAL_WAKE = 0.45        # confianza minima; bajar si no te detecta, subir si hay falsos
 UMBRAL_APLAUSO = 15000    # volumen tipico de un aplauso cerca del micro
 UMBRAL_VOZ = 1000         # volumen minimo para considerar que hablas
 SILENCIO_MAX_S = 1.4      # silencio que marca el fin de tu orden
@@ -105,7 +105,9 @@ def preguntar(mensaje):
 
 
 def main():
-    print("\nJARVIS PRO listo. Di 'Hey Jarvis' o aplaude 2 veces (Ctrl+C para salir)\n")
+    print("\nJARVIS PRO listo.")
+    print("Di 'Hey Jarvis' (J en ingles, como 'jungle') o aplaude 2 veces.")
+    print("Ctrl+C para salir.\n")
     hablar("Jarvis en linea, senor.")
     print("(Escuchando... di 'Hey Jarvis' o aplaude 2 veces)")
     aplausos = []

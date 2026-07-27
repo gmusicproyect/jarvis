@@ -1,0 +1,53 @@
+# Python / Poetry
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+/build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Runtime standalone / caches
+.runtime/
+
+# Secrets — nunca el .env real; sí el ejemplo
+.env
+!.env.example
+config/settings.json
+
+# Datos locales / personales / índices (anclado a la raíz)
+/data/
+!/data/**/.gitkeep
+
+# Artefactos de distribución (se regeneran desde el commit)
+/dist/
+*.dmg
+*.gguf
+
+# Bases y vectores residuales fuera de /data (por si aparecen)
+*.sqlite
+*.sqlite3
+*.db
+.chroma/
+
+# Legacy runtime noise
+legacy/**/*.log
+n8n*.log
+*.wav
+!assets/sounds/*.wav
+
+# Evidencia de auditoría voluminosa (el informe sí se versiona)
+docs/jarvis_audit_bundle.txt
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Local bare remotes / machine-specific
+.bare.git/

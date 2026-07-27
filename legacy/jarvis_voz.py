@@ -14,7 +14,7 @@ import sounddevice as sd
 
 WEBHOOK_URL = "http://localhost:5678/webhook/jarvis"
 KOKORO_MODEL = "mlx-community/Kokoro-82M-bf16"
-KOKORO_VOZ = "em_alex"      # masculina espanol; alternativas: em_santa (masc), ef_dora (fem)
+KOKORO_VOZ = "em_santa"     # masculina espanol; alternativas: em_alex (masc), ef_dora (fem)
 MODELO_WHISPER = "small"
 SAMPLE_RATE = 16000
 

@@ -1,0 +1,171 @@
+app:
+  name: Jarvis
+  version: 1.0.0-rc.1
+  user_name: Juan
+  language: es
+  onboarding_completed: true
+  performance_profile: balanced
+paths:
+  data_dir: data
+  logs_dir: data/logs
+  db_path: data/db/jarvis.db
+  chroma_dir: data/chroma
+  documents_dir: data/documents
+  sounds_dir: assets/sounds
+  activation_sound: /System/Library/Sounds/Ping.aiff
+  knowledge_dir: knowledge
+logging:
+  level: INFO
+  json: false
+  file: data/logs/jarvis.log
+llm:
+  provider: ollama
+  model: llama3.2:3b
+  base_url: http://127.0.0.1:11434
+  temperature: 0.7
+  timeout_s: 120
+  system_prompt: 'Eres Jarvis, un asistente ejecutivo educado, profesional y con humor
+    moderado. Responde en español, de forma concisa y natural, como un mayordomo tecnológico.
+    Dirígete al usuario por su nombre: {user_name}.
+
+    '
+wake:
+  provider: openwakeword
+  model: hey_jarvis
+  threshold: 0.45
+  sample_rate: 16000
+  chunk_samples: 1280
+stt:
+  provider: faster_whisper
+  model_size: small
+  language: es
+  auto_detect_english: true
+  device: cpu
+  compute_type: int8
+tts:
+  provider: kokoro
+  voice: em_santa
+  lang_code: e
+  model: mlx-community/Kokoro-82M-bf16
+  speed: 1.0
+capture:
+  voice_threshold: 1000
+  silence_max_s: 1.4
+  wait_voice_s: 5.0
+  max_utterance_s: 15.0
+session:
+  followup_enabled: true
+  followup_seconds: 6.0
+  cancel_phrases:
+  - cancela
+  - cancélalo
+  - detente
+  - detén
+  - para
+  - para ya
+  - silencio
+  - callate
+  - cállate
+  - stop
+  - cancel
+  clap_enabled: true
+  clap_threshold: 15000
+  clap_window_s: 1.5
+  clap_count: 2
+metrics:
+  enabled: true
+  log_system_usage: true
+memory:
+  enabled: true
+  short_term_turns: 20
+  persistent_provider: sqlite
+  semantic_provider: chroma
+  semantic_enabled: true
+  embedding_model: nomic-embed-text
+  embedding_base_url: http://127.0.0.1:11434
+  db_path: data/db/jarvis.db
+  chroma_dir: data/chroma
+  top_k: 5
+rag:
+  enabled: true
+  collection: jarvis_docs
+  chroma_dir: data/chroma_rag
+  index_db: data/db/rag_index.db
+  embedding_model: nomic-embed-text
+  embedding_base_url: http://127.0.0.1:11434
+  knowledge_dir: knowledge
+  watch_enabled: false
+  top_k: 5
+  min_score: 0.35
+  chunk_size: 800
+  chunk_overlap: 120
+  max_file_mb: 25
+  parallel_workers: 4
+  cache_embeddings: true
+  cite_required: true
+  refuse_if_insufficient: true
+skills:
+  enabled: true
+  plugin_dir: skills
+  min_score: 0.55
+  use_llm_router: true
+  weather:
+    provider: open_meteo
+    latitude: 9.93
+    longitude: -84.08
+    city: San José
+  news:
+    rss_url: https://feeds.bbci.co.uk/mundo/rss.xml
+    limit: 3
+automation:
+  enabled: true
+  browser_provider: system_open
+  browser_headless: false
+  audit_db: data/db/automation_audit.db
+  screenshots_dir: data/screenshots
+  shell_allowlist:
+  - ls
+  - pwd
+  - echo
+  - date
+  - whoami
+  - uname
+  - df
+  - du
+  - cat
+  - head
+  - tail
+  - wc
+  - which
+  - brew
+  - git
+  - python3
+  - poetry
+  - ollama
+vision:
+  enabled: true
+  provider: ollama
+  model: llava
+  base_url: http://127.0.0.1:11434
+  ocr_provider: tesseract
+  ocr_languages:
+  - spa
+  - eng
+  captures_dir: data/screenshots
+  history_enabled: true
+  history_db: data/db/vision_history.db
+  use_ocr_by_default: true
+  use_vision_by_default: true
+gui:
+  enabled: true
+  backend: qt
+  start_minimized: false
+  show_tray: true
+security:
+  confirm_destructive: true
+  allow_restricted: false
+  privacy_mode: false
+personality:
+  style: executive_butler
+  humor: moderate
+  address_user_by_name: true

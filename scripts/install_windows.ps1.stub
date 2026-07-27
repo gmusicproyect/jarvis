@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Stub Windows — documenta pasos NSIS/WiX (ejecutar en Windows)
+echo "Jarvis Windows installer (stub)"
+echo "1) Instalar Python 3.12 + Poetry"
+echo "2) poetry install -E gui"
+echo "3) Empaquetar con PyInstaller:"
+echo "   poetry run pyinstaller -n Jarvis --windowed -m jarvis"
+echo "4) Generar instalador NSIS/WiX sobre dist/Jarvis.exe"
+echo "Ver docs/INSTALLATION.md"

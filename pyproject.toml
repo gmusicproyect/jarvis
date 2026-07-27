@@ -1,0 +1,112 @@
+[tool.poetry]
+name = "jarvis"
+version = "1.0.0rc1"
+description = "Jarvis — asistente de voz personal local-first (Hey Jarvis)"
+authors = ["Juan <juan@local>"]
+readme = "README.md"
+packages = [{ include = "jarvis", from = "src" }]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+pydantic = "^2.10"
+pydantic-settings = "^2.7"
+pyyaml = "^6.0"
+python-dotenv = "^1.0"
+structlog = "^24.4"
+platformdirs = "^4.3"
+httpx = "^0.28"
+numpy = "^2.2"
+sounddevice = "^0.5"
+faster-whisper = "^1.1"
+openwakeword = "^0.6"
+onnxruntime = "^1.20"
+psutil = "^6.1"
+chromadb = "^0.6"
+pypdf = "^5.0"
+python-docx = "^1.1"
+openpyxl = "^3.1"
+python-pptx = "^1.0"
+watchdog = "^6.0"
+llama-index-core = "^0.12"
+playwright = { version = "^1.49", optional = true }
+Pillow = "^11.0"
+pytesseract = { version = "^0.3", optional = true }
+easyocr = { version = "^1.7", optional = true }
+PySide6 = { version = "^6.8", optional = true }
+# mlx-audio (Kokoro) se instala aparte en macOS:
+#   poetry run pip install mlx-audio
+# Si falta, el TTS hace fallback a provider system (`say`).
+
+[tool.poetry.extras]
+automation = ["playwright"]
+vision = ["pytesseract", "Pillow"]
+vision-easyocr = ["easyocr"]
+gui = ["PySide6"]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3"
+pytest-cov = "^6.0"
+ruff = "^0.9"
+black = "^25.1"
+pre-commit = "^4.1"
+mypy = "^1.14"
+types-PyYAML = "^6.0"
+
+# Grupos futuros (Fases 1+): se activan con poetry install --with voice,llm,rag,gui
+[tool.poetry.group.voice]
+optional = true
+
+[tool.poetry.group.voice.dependencies]
+numpy = "^2.2"
+sounddevice = "^0.5"
+# faster-whisper, openwakeword, mlx-audio/piper se añaden en Fase 1
+
+[tool.poetry.group.llm]
+optional = true
+
+[tool.poetry.group.llm.dependencies]
+httpx = "^0.28"
+
+[tool.poetry.group.rag]
+optional = true
+
+[tool.poetry.group.gui]
+optional = true
+
+[tool.poetry.group.gui.dependencies]
+PySide6 = "^6.8"
+
+[tool.poetry.scripts]
+jarvis = "jarvis.__main__:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM", "ANN"]
+ignore = ["ANN401"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["jarvis"]
+mypy_path = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q --cov=jarvis --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["jarvis"]
+branch = true

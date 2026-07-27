@@ -1,0 +1,12 @@
+name: echo_plugin
+version: 1.0.0
+author: Jarvis
+description: Plugin de ejemplo que repite texto tras la palabra eco
+permissions:
+  - safe
+dependencies: []
+skills:
+  - echo_plugin
+compatibility: ">=0.1.0"
+entry: skill.py
+enabled: true
