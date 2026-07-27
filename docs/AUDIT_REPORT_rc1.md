@@ -66,8 +66,8 @@ Warnings doctor: `llava` ausente, `tesseract` fuera de PATH, permisos macOS.
 
 | ID | Sev. | Evidencia | Recomendación | Estado |
 |---|---|---|---|---|
-| **P0-1** | Bloquea | `src/`, `docs/`, `VERSION` untracked; sin tags | Backup + commit de release **sin** cambiar VERSION ni crear tag | Pendiente (requiere aprobación de commit) |
-| **P0-2** | Bloquea | `--health` vs `doctor` en visión | `--health` debe sondar estado real | **Corregido en código** |
+| **P0-1** | Bloquea | `src/`, `docs/`, `VERSION` untracked; sin tags | Backup + commit de release **sin** cambiar VERSION ni crear tag | **Cerrado** en `2f4fb71` (docs hash en `949c207`) |
+| **P0-2** | Bloquea | `--health` vs `doctor` en visión | `--health` debe sondar estado real | **Corregido** — 75 tests |
 | **P1-1** | Antes/tras 1.0.0 | llava/tesseract faltan en dev | Provisionar o declarar visión opcional en onboarding/checklist | Pendiente decisión producto |
 | **P1-2** | Antes/tras 1.0.0 | DMG 554K bootstrap | Documentar red/descargas en checklist | Parcial en CLEAN_MAC |
 | **P1-3** | Antes/tras 1.0.0 | solo unit / sin cov en corrida | cov + smoke E2E voz | Pendiente |
