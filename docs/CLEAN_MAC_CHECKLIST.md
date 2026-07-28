@@ -9,9 +9,53 @@ Release tag: BLOCKED
 Phase 10: BLOCKED
 ```
 
+```text
+ARTEFACTO BAJO VALIDACIÓN
+  Archivo:       Jarvis-1.0.0-rc.1.dmg  (612K)
+  Commit ancla:  741dd825567f17deb1a76d7dc9837b86fc12d24e
+  SHA-256:       aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
+
+PASO 0 — EN EL MAC LIMPIO, ANTES DE INSTALAR
+  shasum -a 256 <ruta>/Jarvis-1.0.0-rc.1.dmg
+  Debe coincidir carácter por carácter. Si no coincide → FAIL, no instalar.
+
+PASO 1 — REQUISITO DE ENTORNO
+  Conexión a internet disponible. El DMG es bootstrap: descarga deps (pip),
+  y requiere Ollama + llama3.2:3b + nomic-embed-text durante/tras la instalación.
+
+PASS BASE — requiere TODOS:
+  [ ] Install.command completa sin pasos manuales no documentados
+  [ ] Onboarding completo
+  [ ] Permisos macOS concedidos (micrófono, accesibilidad, captura)
+  [ ] Ollama + llama3.2:3b + nomic-embed-text quedan instalados por el flujo
+  [ ] Voz E2E: wake "hey jarvis" → STT → respuesta → TTS audible
+  [ ] Memoria persiste tras reinicio de la app
+  [ ] RAG responde sobre knowledge/
+  [ ] Al menos una skill ejecuta
+  [ ] Captura / automatización funcionan con permisos concedidos
+  [ ] Backup y restore completan
+  [ ] jarvis --health → "Vision: degraded"   ← ESPERADO. No es fallo.
+  [ ] jarvis doctor → 0 fail
+
+FAIL si:
+  - El sha256 no coincide
+  - Cualquier "fail" en doctor
+  - El camino de voz no completa de extremo a extremo
+  - --health reporta "Vision: on" sin llava ni tesseract  ← regresión de P0-2
+
+FUERA DE ALCANCE (no bloquea el PASS):
+  - Visión funcional (opt-in, post-1.0.0)
+  - Tiempo y tamaño de descarga de modelos
+
+Estado: PENDING
+Marcado por: ____________  Fecha: __________  Máquina: __________
+```
+
+**Quién marca PASS:** solo el operador humano en hardware real. Ni Cursor ni Claude pueden ejecutar ni firmar este checklist.
+
 **Versión bajo prueba:** `1.0.0-rc.1`  
 **Estado release:** ⬜ **NO PASS** — promoción a `v1.0.0` bloqueada  
-**Validación automatizada (estación de desarrollo):** ✅ `READY_FOR_CLEAN_MAC` — ver `RELEASE_VALIDATION_LOG.md` (17 PASS / 1 WARN / 0 FAIL)
+**Validación automatizada (estación de desarrollo):** ✅ `READY_FOR_CLEAN_MAC` — ver `RELEASE_VALIDATION_LOG.md`
 
 | Campo | Valor |
 |-------|--------|

@@ -70,8 +70,8 @@ Warnings doctor: `llava` ausente, `tesseract` fuera de PATH, permisos macOS.
 | **P0-2** | Bloquea | `--health` vs `doctor` en visión | `--health` debe sondar estado real | **Corregido** — 75 tests |
 | **P1-1** | Antes/tras 1.0.0 | llava/tesseract faltan en dev | Provisionar o declarar visión opcional en onboarding/checklist | **Decidido: visión opt-in para 1.0.0** (`Vision: degraded` = PASS base) |
 | **P1-2** | Antes/tras 1.0.0 | DMG bootstrap | Documentar red/descargas en checklist | Documentado; sha256 del artefacto en log |
-| **P1-3** | Antes/tras 1.0.0 | solo unit / sin cov en corrida | cov + smoke E2E voz | Pendiente |
-| **P1-4** | Antes/tras 1.0.0 | PASS sin hash de commit | Tras commit: re-validar y registrar hash | Pendiente post-commit |
+| **P1-3** | Antes/tras 1.0.0 | solo unit / sin cov en corrida | cov + smoke E2E voz | **Parcial:** cov medida **49%** unit; E2E voz sigue pendiente (Mac limpio) |
+| **P1-4** | Antes/tras 1.0.0 | PASS sin hash de commit | Tras commit: re-validar y registrar hash | **Cerrado** — `741dd82` + sha256 |
 | **P2-1** | Posterior | warnings pydantic/chromadb | Limpiar post-release | Abierto |
 | **P2-2** | Posterior | mensaje llava en inglés | i18n doctor | Abierto |
 | **P2-3** | Posterior | llama3.2:3b techo | perfil con modelo mayor opcional | Abierto / Fase futura |

@@ -5,16 +5,18 @@
 ```text
 Artefacto:     dist/Jarvis-1.0.0-rc.1.dmg (612K)
 Commit ancla:  741dd82 (741dd825567f17deb1a76d7dc9837b86fc12d24e)
+Ancla previa:  d045037 — superada por decisión visión opt-in (P1-1)
+Cadena:        d045037 ? 741dd82 (1 commit docs; merge-base ancestor OK)
 Árbol:         limpio en el momento del build (docs visión opt-in incluidos)
 SHA-256:       aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
 Huella local:  ~/Desktop/jarvis_rc1_dmg.sha256
 Tests:         75 passed — tests/unit/
-Cobertura:     ~49% líneas (jarvis) — unit only; no E2E voz
+Cobertura:     49% líneas (TOTAL 6598/3108 miss) — unit only; P1-3 abierto (sin E2E)
 Doctor:        12 ok · 3 warn · 0 fail (llava, tesseract, permisos macOS)
 Health:        Vision: degraded — reporta runtime real (P0-2 cerrado)
 Visión 1.0.0:  OPT-IN — degraded = PASS del camino base (P1-1 cerrado)
 release_validate.sh: PASS (17 PASS / 1 WARN / 0 FAIL)
-Mac limpio:    PENDING
+Mac limpio:    PENDING — solo operador humano en hardware real
 Tag v1.0.0:    no creada — bloqueada
 Fase 10:       bloqueada
 ```
