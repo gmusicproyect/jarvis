@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import shutil
+import shlex
 import subprocess
 from pathlib import Path
 
@@ -244,27 +245,25 @@ class MacShellController:
     def __init__(self, allowlist: set[str] | None = None) -> None:
         self.allowlist = allowlist or set(self.DEFAULT_ALLOW)
 
-    def run(self, command: str, *, allowed: bool = False) -> tuple[int, str, str]:
-        first = command.strip().split()[0] if command.strip() else ""
-        base = Path(first).name
-        if not allowed and base not in self.allowlist:
-            raise PermissionError(
-                f"Comando no permitido: {base}. "
-                f"Permitidos: {', '.join(sorted(self.allowlist))}"
-            )
-        dangerous = ("rm -rf /", "mkfs", "diskutil erase", ":(){", "dd if=")
-        low = command.lower()
-        if any(d in low for d in dangerous):
-            raise PermissionError(f"Comando peligroso bloqueado: {command}")
-        result = subprocess.run(
-            command,
-            shell=True,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        return result.returncode, result.stdout or "", result.stderr or ""
+    _SHELL_META = (";", "&&", "||", "|", "`", "$(", "${", ">", "<", "&", "\n")
 
+    def run(self, command: str, *, allowed: bool = False) -> tuple[int, str, str]:
+        cmd = command.strip()
+        if not cmd:
+            return 0, "", ""
+        if any(tok in cmd for tok in self._SHELL_META):
+            raise PermissionError('Solo se permite un comando simple sin tuberías, redirecciones ni encadenamiento.')
+        try:
+            argv = shlex.split(cmd)
+        except ValueError as exc:
+            raise PermissionError(f'Comando mal formado: {exc}') from exc
+        if not argv:
+            return 0, "", ""
+        base = Path(argv[0]).name
+        if not allowed and base not in self.allowlist:
+            raise PermissionError(f'Comando no permitido: {base}. Permitidos: {", ".join(sorted(self.allowlist))}')
+        result = subprocess.run(argv, shell=False, capture_output=True, text=True, check=False)
+        return result.returncode, result.stdout or "", result.stderr or ""
 
 class MacScreenshotController:
     name = "macos_screenshot"

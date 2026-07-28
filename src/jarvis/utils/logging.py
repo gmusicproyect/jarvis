@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from logging.handlers import RotatingFileHandler
 import sys
 from pathlib import Path
 from typing import Any
@@ -65,7 +66,7 @@ def setup_logging(cfg: JarvisConfig) -> None:
     console.setFormatter(formatter)
     root.addHandler(console)
 
-    file_handler = logging.FileHandler(log_path, encoding="utf-8")
+    file_handler = RotatingFileHandler(log_path, encoding="utf-8", maxBytes=10*1024*1024, backupCount=5)
     # Archivo siempre en JSON para grep/análisis
     file_formatter = structlog.stdlib.ProcessorFormatter(
         processors=[
