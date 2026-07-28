@@ -24,6 +24,12 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+HOME = Path.home()
+ROOT = Path(__file__).resolve().parents[1]
+CRITICAL: list[bool] = []
+WARNINGS = 0
+
+
 def prefer_python() -> list[str]:
     """Usa el Python del venv de Jarvis / Poetry si existe (no el system bare)."""
     candidates = [
