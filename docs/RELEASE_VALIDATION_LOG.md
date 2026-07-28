@@ -16,7 +16,8 @@ Doctor:        12 ok · 3 warn · 0 fail (llava, tesseract, permisos macOS)
 Health:        Vision: degraded — reporta runtime real (P0-2 cerrado)
 Vision 1.0.0:  OPT-IN — degraded = PASS del camino base (P1-1 cerrado)
 release_validate.sh: PASS (17 PASS / 1 WARN / 0 FAIL)
-Mac limpio:    PENDING — solo operador humano; capturar doctor/health/sha256 (PASS o FAIL)
+Mac limpio:    CRITERIO ACTUALIZADO ? "instalación fresca de Jarvis" (no Mac de fábrica)
+               PENDING — misma Mac OK con otra cuenta o wipe dirigido de Jarvis
 Tag v1.0.0:    no creada — bloqueada
 Fase 10:       bloqueada
 ```

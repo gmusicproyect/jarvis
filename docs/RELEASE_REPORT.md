@@ -41,7 +41,7 @@
 
 | Criterio | Estado |
 |----------|--------|
-| Instala en Mac limpio | Pendiente checklist |
+| Instala en Mac limpio | **Criterio aligerado:** instalación fresca (no Mac virgen). PENDING |
 | Funciona sin terminal (GUI) | Sí (`jarvis gui` / `.app`) |
 | Onboarding inicial | Sí |
 | Recuperación ante fallos comunes | Sí (doctor + hardening Fase 8) |
@@ -70,7 +70,7 @@ Ver `docs/AUDIT_REPORT_rc1.md`.
 
 ### Pendiente (bloquea v1.0.0)
 - Commit de release anclado (P0-1) + re-validar con hash
-- Mac limpio PASS (`docs/CLEAN_MAC_CHECKLIST.md`)
+- Mac limpio PASS (`docs/CLEAN_MAC_CHECKLIST.md`) — criterio: instalación fresca, no hardware virgen
 - Firma + notarización Apple (si distribución pública)
 - Tag `v1.0.0` / bump VERSION
 
