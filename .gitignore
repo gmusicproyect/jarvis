@@ -51,3 +51,6 @@ docs/jarvis_audit_bundle.txt
 
 # Local bare remotes / machine-specific
 .bare.git/
+
+# Evidencia local / backups de Escritorio (no versionar binarios)
+/artifacts/

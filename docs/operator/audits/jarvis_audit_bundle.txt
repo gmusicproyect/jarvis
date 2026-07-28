@@ -1,0 +1,988 @@
+===== META =====
+generated_at=2026-07-27T22:58:57Z
+host=MacBook-Pro-de-Juan.local
+pwd=/Users/juanlizamah/jarvis
+
+===== VERSION =====
+1.0.0-rc.1
+
+===== pyproject version =====
+name = "jarvis"
+version = "1.0.0rc1"
+
+===== GIT =====
+6740ee1 Add offline Jarvis context for Cursor
+010d3ea Initial jarvis project
+--- status ---
+ M CONTEXTO-JARVIS.md
+ D jarvis.py
+ D jarvis_pro.py
+ D jarvis_voz.py
+ D test_wakeword.py
+?? .env.example
+?? .gitignore
+?? .pre-commit-config.yaml
+?? CHANGELOG.md
+?? README.md
+?? RELEASE_NOTES.md
+?? VERSION
+?? assets/
+?? config/
+?? data/
+?? docs/
+?? knowledge/
+?? legacy/
+?? plugins/
+?? poetry.lock
+?? pyproject.toml
+?? scripts/
+?? skills/
+?? src/
+?? tests/
+--- branch ---
+* main 6740ee1 [origin/main] Add offline Jarvis context for Cursor
+--- tags ---
+
+===== ARBOL src/jarvis (maxdepth 3) =====
+src/jarvis
+src/jarvis/__init__.py
+src/jarvis/__main__.py
+src/jarvis/__pycache__
+src/jarvis/app
+src/jarvis/app/__init__.py
+src/jarvis/app/__pycache__
+src/jarvis/app/orchestrator.py
+src/jarvis/audio
+src/jarvis/audio/__init__.py
+src/jarvis/audio/__pycache__
+src/jarvis/audio/capture.py
+src/jarvis/audio/stt
+src/jarvis/audio/stt/__init__.py
+src/jarvis/audio/stt/__pycache__
+src/jarvis/audio/stt/faster_whisper_stt.py
+src/jarvis/audio/tts
+src/jarvis/audio/tts/__init__.py
+src/jarvis/audio/tts/__pycache__
+src/jarvis/audio/tts/kokoro_tts.py
+src/jarvis/audio/wake
+src/jarvis/audio/wake/__init__.py
+src/jarvis/audio/wake/__pycache__
+src/jarvis/audio/wake/openwakeword_provider.py
+src/jarvis/automation
+src/jarvis/automation/__init__.py
+src/jarvis/automation/__pycache__
+src/jarvis/automation/audit.py
+src/jarvis/automation/base.py
+src/jarvis/automation/browser.py
+src/jarvis/automation/engine.py
+src/jarvis/automation/factory.py
+src/jarvis/automation/gate.py
+src/jarvis/automation/macos.py
+src/jarvis/automation/permissions.py
+src/jarvis/automation/stubs.py
+src/jarvis/backup
+src/jarvis/backup/__init__.py
+src/jarvis/backup/__pycache__
+src/jarvis/backup/manager.py
+src/jarvis/brain
+src/jarvis/brain/__init__.py
+src/jarvis/brain/__pycache__
+src/jarvis/brain/hybrid_router.py
+src/jarvis/brain/intent.py
+src/jarvis/cli_phase8.py
+src/jarvis/cli_phase9.py
+src/jarvis/config
+src/jarvis/config/__init__.py
+src/jarvis/config/__pycache__
+src/jarvis/config/loader.py
+src/jarvis/doctor
+src/jarvis/doctor/__init__.py
+src/jarvis/doctor/__pycache__
+src/jarvis/events
+src/jarvis/events/__init__.py
+src/jarvis/events/__pycache__
+src/jarvis/events/bus.py
+src/jarvis/gui
+src/jarvis/gui/__init__.py
+src/jarvis/gui/__pycache__
+src/jarvis/gui/api
+src/jarvis/gui/api/__init__.py
+src/jarvis/gui/api/__pycache__
+src/jarvis/gui/api/config_store.py
+src/jarvis/gui/api/controller.py
+src/jarvis/gui/api/models.py
+src/jarvis/gui/api/protocol.py
+src/jarvis/gui/qt
+src/jarvis/gui/qt/__init__.py
+src/jarvis/gui/qt/app.py
+src/jarvis/gui/qt/main_window.py
+src/jarvis/gui/qt/styles.py
+src/jarvis/gui/qt/tray.py
+src/jarvis/hardening
+src/jarvis/hardening/__init__.py
+src/jarvis/hardening/__pycache__
+src/jarvis/hardening/errors.py
+src/jarvis/hardening/recovery.py
+src/jarvis/llm
+src/jarvis/llm/__init__.py
+src/jarvis/llm/__pycache__
+src/jarvis/llm/ollama.py
+src/jarvis/mcp
+src/jarvis/mcp/__init__.py
+src/jarvis/memory
+src/jarvis/memory/__init__.py
+src/jarvis/memory/__pycache__
+src/jarvis/memory/base.py
+src/jarvis/memory/factory.py
+src/jarvis/memory/semantic.py
+src/jarvis/memory/service.py
+src/jarvis/memory/session.py
+src/jarvis/memory/sqlite_store.py
+src/jarvis/models
+src/jarvis/models/__init__.py
+src/jarvis/models/__pycache__
+src/jarvis/models/manager.py
+src/jarvis/onboarding
+src/jarvis/onboarding/__init__.py
+src/jarvis/onboarding/__pycache__
+src/jarvis/platform
+src/jarvis/platform/__init__.py
+src/jarvis/platform/__pycache__
+src/jarvis/platform/autostart.py
+src/jarvis/plugins
+src/jarvis/plugins/__init__.py
+src/jarvis/plugins/__pycache__
+src/jarvis/plugins/manager.py
+src/jarvis/plugins/manifest.py
+src/jarvis/plugins/marketplace.py
+src/jarvis/privacy
+src/jarvis/privacy/__init__.py
+src/jarvis/privacy/__pycache__
+src/jarvis/profiles
+src/jarvis/profiles/__init__.py
+src/jarvis/profiles/__pycache__
+src/jarvis/providers
+src/jarvis/providers/__init__.py
+src/jarvis/providers/__pycache__
+src/jarvis/providers/base.py
+src/jarvis/providers/factory.py
+src/jarvis/rag
+src/jarvis/rag/__init__.py
+src/jarvis/rag/__pycache__
+src/jarvis/rag/base.py
+src/jarvis/rag/chunker.py
+src/jarvis/rag/embeddings.py
+src/jarvis/rag/factory.py
+src/jarvis/rag/indexer.py
+src/jarvis/rag/llamaindex_chunker.py
+src/jarvis/rag/loaders.py
+src/jarvis/rag/orchestrator.py
+src/jarvis/rag/retriever.py
+src/jarvis/rag/vectorstore.py
+src/jarvis/rag/watcher.py
+src/jarvis/release
+src/jarvis/release/__init__.py
+src/jarvis/release/__pycache__
+src/jarvis/security
+src/jarvis/security/__init__.py
+src/jarvis/security/__pycache__
+src/jarvis/security/audit.py
+src/jarvis/security/secrets.py
+src/jarvis/skills
+src/jarvis/skills/__init__.py
+src/jarvis/skills/__pycache__
+src/jarvis/skills/base.py
+src/jarvis/skills/builtin
+src/jarvis/skills/builtin/__init__.py
+src/jarvis/skills/builtin/__pycache__
+src/jarvis/skills/builtin/_automation.py
+src/jarvis/skills/builtin/_text.py
+src/jarvis/skills/builtin/_vision.py
+src/jarvis/skills/builtin/analyze_image.py
+src/jarvis/skills/builtin/ask_docs.py
+src/jarvis/skills/builtin/browser.py
+src/jarvis/skills/builtin/calculator.py
+src/jarvis/skills/builtin/clipboard.py
+src/jarvis/skills/builtin/datetime_skill.py
+src/jarvis/skills/builtin/delete_file.py
+src/jarvis/skills/builtin/describe_screen.py
+src/jarvis/skills/builtin/filesystem.py
+src/jarvis/skills/builtin/find_on_screen.py
+src/jarvis/skills/builtin/news.py
+src/jarvis/skills/builtin/ocr_image.py
+src/jarvis/skills/builtin/open_app.py
+src/jarvis/skills/builtin/open_application.py
+src/jarvis/skills/builtin/open_url.py
+src/jarvis/skills/builtin/read_screen.py
+src/jarvis/skills/builtin/read_text.py
+src/jarvis/skills/builtin/reminder.py
+src/jarvis/skills/builtin/save_to_knowledge.py
+src/jarvis/skills/builtin/screenshot.py
+src/jarvis/skills/builtin/search_files.py
+src/jarvis/skills/builtin/terminal.py
+src/jarvis/skills/builtin/timer.py
+src/jarvis/skills/builtin/weather.py
+src/jarvis/skills/builtin/window_manager.py
+src/jarvis/skills/manager.py
+src/jarvis/skills/skill.py
+src/jarvis/utils
+src/jarvis/utils/__init__.py
+src/jarvis/utils/__pycache__
+src/jarvis/utils/logging.py
+src/jarvis/utils/metrics.py
+src/jarvis/vision
+src/jarvis/vision/__init__.py
+src/jarvis/vision/__pycache__
+src/jarvis/vision/analyzer.py
+src/jarvis/vision/base.py
+src/jarvis/vision/factory.py
+src/jarvis/vision/history.py
+src/jarvis/vision/ocr.py
+src/jarvis/vision/orchestrator.py
+src/jarvis/vision/providers.py
+src/jarvis/vision/screen.py
+src/jarvis/vision/ui_locate.py
+
+===== RAIZ =====
+total 1736
+drwxr-xr-x  30 juanlizamah  staff     960 Jul 27 18:13 .
+drwxr-x---+ 66 juanlizamah  staff    2112 Jul 27 15:39 ..
+-rw-r--r--@  1 juanlizamah  staff  167936 Jul 27 17:25 .coverage
+-rw-r--r--@  1 juanlizamah  staff     584 Jul 27 17:28 .env
+-rw-r--r--@  1 juanlizamah  staff     584 Jul 27 17:28 .env.example
+drwxr-xr-x@ 15 juanlizamah  staff     480 Jul 27 18:58 .git
+-rw-r--r--@  1 juanlizamah  staff     582 Jul 27 18:08 .gitignore
+-rw-r--r--@  1 juanlizamah  staff     830 Jul 27 17:28 .pre-commit-config.yaml
+drwxr-xr-x@  6 juanlizamah  staff     192 Jul 27 16:23 .pytest_cache
+drwxr-xr-x@  3 juanlizamah  staff      96 Jul 27 18:13 .runtime
+-rw-r--r--@  1 juanlizamah  staff    1347 Jul 27 17:52 CHANGELOG.md
+-rw-r--r--@  1 juanlizamah  staff    2285 Jul 27 17:28 CONTEXTO-JARVIS.md
+-rw-r--r--@  1 juanlizamah  staff    3253 Jul 27 17:57 README.md
+-rw-r--r--@  1 juanlizamah  staff    1820 Jul 27 17:52 RELEASE_NOTES.md
+-rw-r--r--@  1 juanlizamah  staff      11 Jul 27 17:52 VERSION
+drwxr-xr-x@  4 juanlizamah  staff     128 Jul 27 17:57 assets
+drwxr-xr-x@  3 juanlizamah  staff      96 Jul 27 16:21 config
+drwxr-xr-x@ 10 juanlizamah  staff     320 Jul 27 18:12 data
+drwxr-xr-x@  3 juanlizamah  staff      96 Jul 27 18:15 dist
+drwxr-xr-x@ 31 juanlizamah  staff     992 Jul 27 18:51 docs
+drwxr-xr-x@  4 juanlizamah  staff     128 Jul 27 17:07 knowledge
+drwxr-xr-x@  6 juanlizamah  staff     192 Jul 27 16:22 legacy
+drwxr-xr-x@  3 juanlizamah  staff      96 Jul 27 17:47 plugins
+-rw-r--r--@  1 juanlizamah  staff  676401 Jul 27 17:42 poetry.lock
+-rw-r--r--@  1 juanlizamah  staff    2484 Jul 27 17:54 pyproject.toml
+drwxr-xr-x@ 13 juanlizamah  staff     416 Jul 27 18:08 scripts
+drwxr-xr-x@  5 juanlizamah  staff     160 Jul 27 17:02 skills
+drwxr-xr-x@  3 juanlizamah  staff      96 Jul 27 16:21 src
+drwxr-xr-x@  5 juanlizamah  staff     160 Jul 27 16:23 tests
+drwxr-xr-x@  7 juanlizamah  staff     224 Jul 26 12:18 venv
+
+===== docs/ =====
+total 248
+drwxr-xr-x@ 31 juanlizamah  staff   992 Jul 27 18:51 .
+drwxr-xr-x  30 juanlizamah  staff   960 Jul 27 18:13 ..
+-rw-r--r--@  1 juanlizamah  staff   483 Jul 27 17:28 00-DECISIONES-APROBADAS.md
+-rw-r--r--@  1 juanlizamah  staff  4066 Jul 27 17:28 00-PROPUESTAS-ANTES-DE-IMPLEMENTAR.md
+-rw-r--r--@  1 juanlizamah  staff  3678 Jul 27 17:28 01-ARQUITECTURA.md
+-rw-r--r--@  1 juanlizamah  staff  4094 Jul 27 17:28 02-ARBOL.md
+-rw-r--r--@  1 juanlizamah  staff  2203 Jul 27 17:28 03-TECNOLOGIAS-Y-DEPS.md
+-rw-r--r--@  1 juanlizamah  staff  3298 Jul 27 17:28 04-FLUJO.md
+-rw-r--r--@  1 juanlizamah  staff  4488 Jul 27 17:58 05-ROADMAP-Y-FASES.md
+-rw-r--r--@  1 juanlizamah  staff  2046 Jul 27 17:28 06-DIAGRAMA-MODULOS.md
+-rw-r--r--@  1 juanlizamah  staff  1895 Jul 27 17:48 ARCHITECTURE_FINAL.md
+-rw-r--r--@  1 juanlizamah  staff  4066 Jul 27 18:18 CLEAN_MAC_CHECKLIST.md
+-rw-r--r--@  1 juanlizamah  staff  1003 Jul 27 17:28 FASE-0-COMPLETADA.md
+-rw-r--r--@  1 juanlizamah  staff  2629 Jul 27 17:28 FASE-1-COMPLETADA.md
+-rw-r--r--@  1 juanlizamah  staff  1542 Jul 27 17:28 FASE-2-COMPLETADA.md
+-rw-r--r--@  1 juanlizamah  staff  1508 Jul 27 17:28 FASE-3-COMPLETADA.md
+-rw-r--r--@  1 juanlizamah  staff  2337 Jul 27 17:28 FASE-4-COMPLETADA.md
+-rw-r--r--@  1 juanlizamah  staff  3087 Jul 27 17:29 FASE-5-COMPLETADA.md
+-rw-r--r--@  1 juanlizamah  staff  2550 Jul 27 17:35 FASE-6-COMPLETADA.md
+-rw-r--r--@  1 juanlizamah  staff  1706 Jul 27 17:41 FASE-7-COMPLETADA.md
+-rw-r--r--@  1 juanlizamah  staff  1673 Jul 27 17:49 FASE-8-COMPLETADA.md
+-rw-r--r--@  1 juanlizamah  staff  1619 Jul 27 17:57 FASE-9-COMPLETADA.md
+-rw-r--r--@  1 juanlizamah  staff   681 Jul 27 17:28 HOTFIX-PYTHON-312.md
+-rw-r--r--@  1 juanlizamah  staff  1066 Jul 27 17:48 INSTALLATION.md
+-rw-r--r--@  1 juanlizamah  staff  5487 Jul 27 18:51 INSTRUCCIONES-CLAUDE-EVAL.md
+-rw-r--r--@  1 juanlizamah  staff   883 Jul 27 17:48 PLUGINS.md
+-rw-r--r--@  1 juanlizamah  staff  2767 Jul 27 18:14 RELEASE_REPORT.md
+-rw-r--r--@  1 juanlizamah  staff  2776 Jul 27 18:12 RELEASE_VALIDATION_LOG.md
+-rw-r--r--@  1 juanlizamah  staff  1314 Jul 27 17:59 SECURITY.md
+-rw-r--r--@  1 juanlizamah  staff   902 Jul 27 17:48 TROUBLESHOOTING.md
+-rw-r--r--@  1 juanlizamah  staff  1098 Jul 27 17:48 USER_GUIDE.md
+
+===== scripts/ =====
+total 104
+drwxr-xr-x@ 13 juanlizamah  staff   416 Jul 27 18:08 .
+drwxr-xr-x  30 juanlizamah  staff   960 Jul 27 18:13 ..
+-rwxr-xr-x@  1 juanlizamah  staff  1781 Jul 27 18:07 codesign_and_notarize.sh
+-rwxr-xr-x@  1 juanlizamah  staff  4190 Jul 27 18:14 create_app_bundle.sh
+-rwxr-xr-x@  1 juanlizamah  staff  2930 Jul 27 18:15 create_dmg.sh
+-rwxr-xr-x@  1 juanlizamah  staff   863 Jul 27 17:28 install.sh
+-rwxr-xr-x@  1 juanlizamah  staff   795 Jul 27 17:48 install_macos.sh
+-rwxr-xr-x@  1 juanlizamah  staff  1888 Jul 27 18:13 install_standalone_macos.sh
+-rw-r--r--@  1 juanlizamah  staff   391 Jul 27 17:48 install_windows.ps1.stub
+-rwxr-xr-x@  1 juanlizamah  staff  7390 Jul 27 18:13 release_validate.sh
+-rwxr-xr-x@  1 juanlizamah  staff  1903 Jul 27 18:14 resolve_python.sh
+-rwxr-xr-x@  1 juanlizamah  staff   213 Jul 27 17:28 start_jarvis.sh
+-rwxr-xr-x@  1 juanlizamah  staff   187 Jul 27 17:28 update.sh
+
+===== dist/ =====
+total 1112
+drwxr-xr-x@  3 juanlizamah  staff      96 Jul 27 18:15 .
+drwxr-xr-x  30 juanlizamah  staff     960 Jul 27 18:13 ..
+-rw-r--r--@  1 juanlizamah  staff  567782 Jul 27 18:15 Jarvis-1.0.0-rc.1.dmg
+
+===== plugins/ =====
+total 0
+drwxr-xr-x@  3 juanlizamah  staff   96 Jul 27 17:47 .
+drwxr-xr-x  30 juanlizamah  staff  960 Jul 27 18:13 ..
+drwxr-xr-x@  8 juanlizamah  staff  256 Jul 27 18:11 echo_plugin
+
+===== knowledge/ =====
+knowledge/README.md
+knowledge/manual-instalacion.md
+
+===== legacy/ =====
+total 40
+drwxr-xr-x@  6 juanlizamah  staff   192 Jul 27 16:22 .
+drwxr-xr-x  30 juanlizamah  staff   960 Jul 27 18:13 ..
+-rw-r--r--@  1 juanlizamah  staff  1566 Jul 26 12:20 jarvis.py
+-rw-r--r--@  1 juanlizamah  staff  5828 Jul 27 15:43 jarvis_pro.py
+-rw-r--r--@  1 juanlizamah  staff  3640 Jul 27 15:42 jarvis_voz.py
+-rw-r--r--@  1 juanlizamah  staff   873 Jul 27 14:23 test_wakeword.py
+
+===== jarvis --version =====
+1.0.0-rc.1
+
+===== jarvis doctor =====
+[1mHTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"[0m
+[1mHTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"[0m
+Jarvis doctor — v1.0.0-rc.1
+
+✓ Config: Usuario=Juan perfil=balanced
+✓ Python: Python 3.12.13
+✓ Dependencias: Núcleo instalado
+✓ Ollama: Activo (2 modelos)
+✓ Modelo LLM: llama3.2:3b
+✓ Modelo Embeddings: nomic-embed-text
+⚠ Modelo Vision: Missing model: llava
+    → ollama pull llava
+✓ Memory DB: SQLite OK
+✓ Chroma: Disponible (memory, rag)
+✓ RAG: Activo (2 archivos en knowledge/)
+⚠ Vision: tesseract no está en PATH
+    → brew install tesseract tesseract-lang
+✓ Audio: 3 micrófono(s) detectado(s)
+⚠ Permisos: Verifica Micrófono, Pantalla, Accesibilidad y Notificaciones en Ajustes
+    → System Settings → Privacy & Security
+✓ Disco: 56.0 GB libres
+✓ GPU: Apple / Metal disponible (RAM 18 GB)
+
+Resumen: 12 ok · 3 warn · 0 fail
+
+===== jarvis --health =====
+[2m2026-07-27T22:59:02.820762Z[0m [[32m[1minfo     [0m] [1mhealthcheck                   [0m [[0m[1m[34mjarvis.health[0m][0m [36mconfig_yaml[0m=[35mTrue[0m [36mllm_provider[0m=[35mTrue[0m [36mproject_root[0m=[35mTrue[0m [36mtts_default[0m=[35mTrue[0m [36mversion[0m=[35m1.0.0-rc.1[0m
+Jarvis 1.0.0-rc.1 OK — Juan
+  LLM: ollama/llama3.2:3b
+  TTS: kokoro/em_santa
+  Wake: openwakeword/hey_jarvis
+  RAG: on (top_k=5)
+  Automation: on (system_open)
+  Vision: on (ollama/llava, ocr=tesseract)
+  GUI: on (qt)
+  Follow-up: 6.0s
+
+===== jarvis profile list =====
+  performance  — Equipos potentes — modelos mayores, visión y memoria completa
+◀ balanced     — Configuración recomendada para uso diario
+  lightweight  — Menor RAM — modelos pequeños y menos servicios
+
+===== jarvis plugins list =====
+- echo_plugin v1.0.0 [on] — Plugin de ejemplo que repite texto tras la palabra eco
+
+===== pytest unit =====
+........................................................................ [ 97%]
+..                                                                       [100%]
+=============================== warnings summary ===============================
+tests/unit/test_vision.py::test_save_to_knowledge
+  /private/var/folders/wh/1zszv0hs2d3d9syy8fc9rncr0000gn/T/cursor-sandbox-cache/ad65f122330af5bea7df0e33b0c7ebca/poetry/virtualenvs/jarvis-bEVZkWHD-py3.12/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'validate_default' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'validate_default' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+    warnings.warn(
+
+tests/unit/test_vision.py::test_save_to_knowledge
+tests/unit/test_vision.py::test_save_to_knowledge
+tests/unit/test_vision.py::test_save_to_knowledge
+  /private/var/folders/wh/1zszv0hs2d3d9syy8fc9rncr0000gn/T/cursor-sandbox-cache/ad65f122330af5bea7df0e33b0c7ebca/poetry/virtualenvs/jarvis-bEVZkWHD-py3.12/lib/python3.12/site-packages/chromadb/types.py:144: PydanticDeprecatedSince211: Accessing the 'model_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+    return self.model_fields  # pydantic 2.x
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+
+===== archivos legacy sospechosos =====
+./legacy/jarvis_pro.py
+./venv/lib/python3.14/site-packages/numpy/ma/tests/test_old_ma.py
+./venv/lib/python3.14/site-packages/numpy/ma/tests/__pycache__/test_old_ma.cpython-314.pyc
+./venv/lib/python3.14/site-packages/transformers/models/roberta/tokenization_roberta_old.py
+./venv/lib/python3.14/site-packages/transformers/models/roberta/__pycache__/tokenization_roberta_old.cpython-314.pyc
+
+===== HEADERS docs clave (primeras 40 lineas c/u) =====
+
+----- FILE: docs/CLEAN_MAC_CHECKLIST.md -----
+     137 docs/CLEAN_MAC_CHECKLIST.md
+# Checklist — Mac limpio (Jarvis 1.0 RC)
+
+```
+Jarvis 1.0.0-rc.1
+Automated validation: PASS
+Clean Mac validation: PENDING
+Code signing/notarization: OPTIONAL PENDING
+Release tag: BLOCKED
+Phase 10: BLOCKED
+```
+
+**Versión bajo prueba:** `1.0.0-rc.1`  
+**Estado release:** ⬜ **NO PASS** — promoción a `v1.0.0` bloqueada  
+**Validación automatizada (estación de desarrollo):** ✅ `READY_FOR_CLEAN_MAC` — ver `RELEASE_VALIDATION_LOG.md` (17 PASS / 1 WARN / 0 FAIL)
+
+| Campo | Valor |
+|-------|--------|
+| Fecha Mac limpio | _______________ |
+| Hardware | _______________ |
+| macOS | _______________ |
+| Operador | _______________ |
+
+## Siguiente paso operativo (único)
+
+1. Abrir `dist/Jarvis-1.0.0-rc.1.dmg` en un Mac limpio.
+2. Ejecutar `Install.command`.
+3. Completar instalación, permisos macOS, Ollama/modelos y onboarding.
+4. Probar flujo crítico (voz, memoria, RAG, skills, captura, visión, backup/restore).
+5. Marcar este documento → **PASS**.
+
+Solo entonces: promoción oficial a Jarvis v1.0.0 (VERSION, CHANGELOG, RELEASE_NOTES, `git tag v1.0.0`).
+
+## 0. Pre-requisitos en el Mac limpio
+
+- [ ] Montar `dist/Jarvis-1.0.0-rc.1.dmg` **o** clonar el repo
+- [ ] Python 3.12 (`brew install python@3.12`) si usas instalador standalone
+- [ ] [Ollama](https://ollama.com) instalado y en marcha
+- [ ] Modelos: `ollama pull llama3.2:3b && ollama pull nomic-embed-text` (+ `llava` si pruebas visión)
+
+## 1. Instalación sin Poetry (prioridad)
+
+----- FILE: docs/RELEASE_REPORT.md -----
+      76 docs/RELEASE_REPORT.md
+# Release Report — Jarvis 1.0.0-rc.1
+
+| Campo | Valor |
+|-------|--------|
+| Fecha | 2026-07-27 |
+| Producto | Jarvis |
+| Versión | 1.0.0-rc.1 |
+| Criterio | Release Candidate (pre-1.0.0) |
+| Autor del reporte | Automatizado / desarrollo |
+
+## Hardware / SO (estación de desarrollo)
+
+| Ítem | Valor |
+|------|--------|
+| SO | macOS (darwin) |
+| Python | 3.12 (Poetry) |
+| LLM local | Ollama |
+| Notas | Validación de código + tests unitarios en máquina de desarrollo. **Mac limpio pendiente** — ver `CLEAN_MAC_CHECKLIST.md`. |
+
+## Tests ejecutados
+
+| Suite | Resultado |
+|-------|-----------|
+| `tests/unit/` | **74 passed** (2026-07-27) |
+| `tests/unit/test_fase9.py` | 8 passed |
+| `jarvis doctor` | 11 ok · 4 warn · 0 fail (faltan llava/tesseract en estación de build) |
+| `jarvis profile list` | OK |
+| `jarvis onboard --non-interactive --force` | OK |
+| `jarvis privacy export` | OK → `data/exports/` |
+| `create_app_bundle.sh` | OK |
+| `create_dmg.sh` | OK → `dist/Jarvis-1.0.0-rc.1.dmg` |
+
+## Problemas conocidos
+
+1. DMG / `.app` **sin firma** Apple Developer ID → Gatekeeper requiere «Abrir» manual.
+2. El launcher del `.app` apunta al path del repo (no es un bundle Python standalone).
+3. Modelos grandes no se incluyen en el instalador (pull vía Ollama).
+4. Cobertura ≥90% en críticos: objetivo de 1.0.0; RC cubre módulos nuevos con tests dedicados.
+
+## Criterio de salida RC
+
+----- FILE: docs/RELEASE_VALIDATION_LOG.md -----
+      69 docs/RELEASE_VALIDATION_LOG.md
+# Release validation log
+
+| Campo | Valor |
+|-------|--------|
+| Fecha UTC | 2026-07-27T22:11:13Z |
+| Versión | 1.0.0-rc.1 |
+| PASS | 17 |
+| WARN | 1 |
+| FAIL | 0 |
+
+## Resultados
+
+| Estado | Check | Detalle |
+|--------|-------|---------|
+| PASS | version | 1.0.0-rc.1 |
+| WARN | doctor | advertencias (exit 1) — ver salida |
+| PASS | doctor-no-critical | sin fallos críticos |
+| PASS | snapshot-before | capturado |
+| PASS | backup-create | /Users/juanlizamah/jarvis/data/backups/jarvis-backup-20260727-181117-release-validate.zip |
+| PASS | happy:hora | Jarvis: Son las 18:11 del lunes 27 de julio de 2026. |
+| PASS | happy:memoria | Jarvis: Queda anotado en mi memoria. |
+| PASS | happy:rag | Jarvis: ¿Qué archivo o carpeta busco? |
+| PASS | happy:app | Jarvis: No pude calcular eso. |
+| PASS | happy:screenshot | Jarvis: Captura guardada en /Users/juanlizamah/jarvis/data/screenshots/jarvis-shot-20260727-181207.png. |
+| PASS | happy:vision | respuesta recibida |
+| PASS | privacy-export | /Users/juanlizamah/jarvis/data/exports/jarvis-export-20260727-221238.json |
+| PASS | privacy-wipe | items 4 → 0 |
+| PASS | backup-restore | memoria tras restore=3 (antes wipe=4) |
+| PASS | snapshot-after-restore | config/plugins/chroma presentes |
+| PASS | resolve-python | /var/folders/wh/1zszv0hs2d3d9syy8fc9rncr0000gn/T/cursor-sandbox-cache/ad65f122330af5bea7df0e33b0c7ebca/poetry/virtualenvs/jarvis-bEVZkWHD-py3.12/bin/python |
+| PASS | unit-tests |  |
+| PASS | dmg-artifact | dist/Jarvis-1.0.0-rc.1.dmg |
+
+## Doctor (extracto)
+
+```
+[1mHTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"[0m
+[1mHTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"[0m
+Jarvis doctor — v1.0.0-rc.1
+
+
+----- FILE: docs/FASE-9-COMPLETADA.md -----
+      53 docs/FASE-9-COMPLETADA.md
+# Fase 9 completada — Release Candidate / Producción
+
+**Fecha:** 2026-07-27  
+**Estado:** Completa (candidato **1.0.0-rc.1**)  
+**Producto:** Jarvis
+
+## Entregado
+
+| Área | Implementación |
+|------|----------------|
+| Versionado | `VERSION`, `CHANGELOG.md`, `RELEASE_NOTES.md`, semver |
+| Doctor | `jarvis doctor` (+ `--json`) |
+| Perfiles | performance / balanced / lightweight · `jarvis profile` |
+| Onboarding | `jarvis onboard` + prompt GUI primer arranque |
+| Privacidad | export / wipe / mode + comando de voz |
+| Instaladores | `create_app_bundle.sh` mejorado + `create_dmg.sh` |
+| Checklist Mac limpio | `docs/CLEAN_MAC_CHECKLIST.md` |
+| Reporte | `docs/RELEASE_REPORT.md` |
+| GUI | pestaña Release (perfiles, doctor, privacidad) |
+
+## CLI nueva
+
+```bash
+poetry run jarvis --version          # 1.0.0-rc.1
+poetry run jarvis doctor
+poetry run jarvis profile list
+poetry run jarvis profile apply lightweight
+poetry run jarvis onboard --non-interactive
+poetry run jarvis privacy export
+poetry run jarvis privacy wipe --yes --keep-name
+poetry run jarvis privacy mode on
+```
+
+## Distribución
+
+```bash
+./scripts/create_app_bundle.sh ~/Applications/Jarvis.app
+./scripts/create_dmg.sh          # → dist/Jarvis-1.0.0-rc.1.dmg
+```
+
+
+----- FILE: docs/FASE-8-COMPLETADA.md -----
+      52 docs/FASE-8-COMPLETADA.md
+# Fase 8 completada — Hardening, plugins, producción
+
+**Fecha:** 2026-07-27  
+**Estado:** Completa (producto listo para uso diario / distribución local)
+
+## Entregado
+
+| Área | Implementación |
+|------|----------------|
+| Hardening | `ErrorHandler`, `ResilientTTS`, `OllamaHealth` |
+| Plugins | `manifest.yaml` + `PluginManager` + marketplace stub |
+| Modelos | `ModelManager` (list/pull/remove Ollama) |
+| Secretos | Keychain macOS / env / stub Windows |
+| Auditoría | `SecurityAudit` |
+| Backup | `jarvis backup create\|restore\|list` |
+| Autostart | LaunchAgent / systemd / Startup |
+| Instaladores | `install_macos.sh`, `create_app_bundle.sh`, stub Windows |
+| Docs | INSTALLATION, USER_GUIDE, PLUGINS, SECURITY, ARCHITECTURE_FINAL, TROUBLESHOOTING |
+
+## CLI nueva
+
+```bash
+poetry run jarvis plugins list
+poetry run jarvis plugins install ./plugins/echo_plugin
+poetry run jarvis plugins enable echo_plugin
+poetry run jarvis models list
+poetry run jarvis models pull llama3.2:3b
+poetry run jarvis backup create --label diario
+poetry run jarvis backup restore data/backups/….zip
+poetry run jarvis autostart install
+```
+
+## Criterios
+
+- Instalación en equipo limpio vía scripts + Poetry
+- Arranque GUI / voz / autostart
+- Memoria y config en backups
+- Plugins con permisos validados
+- Modelos gestionados por CLI
+- Recuperación TTS/Ollama sin tumbar el proceso
+
+----- FILE: docs/05-ROADMAP-Y-FASES.md -----
+     124 docs/05-ROADMAP-Y-FASES.md
+# Roadmap y plan por fases
+
+## Roadmap (visión)
+
+| Fase | Nombre | Resultado |
+|------|--------|-----------|
+| 0 | Cimientos | Poetry, config, logging, árbol, legacy aislado |
+| 1 | Voz cerrada | Wake → STT → Ollama/n8n → TTS (paridad con `jarvis_pro`) |
+| 2 | Memoria | SQLite short/long + personalidad por nombre |
+| 3 | Skills base | Abrir apps/URLs, archivos, calculadora, timer |
+| 4 | RAG | Indexar carpeta docs + responder con citas |
+| 5 | Automation OS | macOS completo + esqueleto Windows |
+| 6 | Vision | OCR, screenshot, leer pantalla |
+| 7 | GUI | Tray + panel estado/historial |
+| 8 | Hardening | Seguridad, tests ≥80%, installers, cutover |
+| 9 | Release Candidate | v1.0.0-rc · doctor · onboarding · DMG |
+| 10 | Multiagente _(futuro)_ | Roles especializados |
+
+---
+
+## Fase 0 — Cimientos (1–2 sesiones)
+
+- [ ] `pyproject.toml` Poetry
+- [ ] `config/config.yaml` + `.env.example` + loader tipado (Pydantic)
+- [ ] `src/jarvis/` esqueleto de paquetes
+- [ ] Mover scripts actuales a `legacy/`
+- [ ] Logging profesional a `data/logs/`
+- [ ] `python -m jarvis --version` / healthcheck
+- [ ] Docs ya creadas en `docs/`
+
+**Criterio de salida:** proyecto instalable con Poetry; legacy sigue funcionando.
+
+## Fase 1 — Paridad de voz (crítico)
+
+- [ ] `WakeWordEngine` (OpenWakeWord)
+- [ ] `FasterWhisperSTT`
+- [ ] `KokoroTTS` (+ stub Piper)
+- [ ] `OllamaProvider` + `N8nWebhookProvider`
+- [ ] `Orchestrator` loop = mismo comportamiento que `jarvis_pro.py`
+- [ ] Script `start_jarvis` apunta al nuevo entrypoint
+
+----- FILE: docs/ARCHITECTURE_FINAL.md -----
+      47 docs/ARCHITECTURE_FINAL.md
+# Arquitectura final Jarvis
+
+```
+┌─────────────────────────────────────────────┐
+│ GUI (PySide6) / CLI / Voz                   │
+│        ↓ GuiShell / comandos                │
+│ JarvisGuiController / Orchestrator          │
+└─────────────────────────────────────────────┘
+          │
+┌─────────┴───────────────────────────────────┐
+│ Núcleo (providers)                          │
+│  Wake · STT · LLM · TTS                     │
+│  Memory · RAG · Skills · Plugins            │
+│  Automation · Vision · Hardening            │
+│  Models · Secrets · Backup · Audit          │
+└─────────────────────────────────────────────┘
+```
+
+## Capas
+
+| Capa | Paquete |
+|------|---------|
+| Config | `jarvis.config` |
+| Voz | `jarvis.audio`, `jarvis.llm` |
+| Memoria | `jarvis.memory` |
+| RAG | `jarvis.rag` |
+| Skills/Plugins | `jarvis.skills`, `jarvis.plugins` |
+| OS | `jarvis.automation` |
+| Visión | `jarvis.vision` |
+| GUI | `jarvis.gui` |
+| Producción | `jarvis.hardening`, `backup`, `security`, `models` |
+
+## Reglas
+
+1. La GUI no contiene lógica de negocio.
+2. Todo proveedor es sustituible por config.
+3. Fallos de TTS/Ollama no tumban el proceso.
+4. Plugins llevan `manifest.yaml` y permisos validados.
+5. Backups no incluyen modelos grandes ni cachés.
+
+
+----- FILE: docs/01-ARQUITECTURA.md -----
+      80 docs/01-ARQUITECTURA.md
+# Arquitectura completa — Jarvis
+
+## Visión
+
+Asistente de voz personal en segundo plano: wake word → STT → intención → LLM/skills → TTS → espera.
+
+Principios:
+
+- **Local-first** (offline por defecto)
+- **Providers intercambiables** (LLM / STT / TTS / Wake)
+- **Clean Architecture** + SOLID
+- **Skills** desacopladas (una capacidad = un módulo)
+- **Confirmación humana** en acciones peligrosas
+
+---
+
+## Capas
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  gui/  (tray, estado mic, start/stop, historial)        │
+├─────────────────────────────────────────────────────────┤
+│  api/  (opcional: FastAPI local para control remoto)    │
+├─────────────────────────────────────────────────────────┤
+│  app/  Orchestrator  — loop principal                   │
+├──────────────┬──────────────┬───────────────────────────┤
+│  audio/      │  brain/      │  skills/                  │
+│  wake        │  intent      │  system, browser, docs…   │
+│  stt         │  planner     │  vision, automation…      │
+│  tts         │  prompts     │                           │
+├──────────────┼──────────────┼───────────────────────────┤
+│  llm/        │  memory/     │  rag/                     │
+│  providers   │  short/long  │  ingest, retrieve         │
+├──────────────┴──────────────┴───────────────────────────┤
+│  database/  (SQLite → PostgreSQL ready)                 │
+│  config/    (.env, config.yaml, settings)               │
+│  utils/     (logging, security, metrics)                │
+└─────────────────────────────────────────────────────────┘
+```
+
+
+----- FILE: CHANGELOG.md -----
+      36 CHANGELOG.md
+# Changelog
+
+Todos los cambios notables de Jarvis se documentan aquí.
+
+El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/)
+y el proyecto usa [Semantic Versioning](https://semver.org/lang/es/).
+
+## [1.0.0-rc.1] — 2026-07-27
+
+### Añadido
+
+- Control de versión oficial (`VERSION`, `CHANGELOG.md`, `RELEASE_NOTES.md`).
+- `jarvis doctor` — diagnóstico automático (Python, Ollama, audio, DB, Chroma, disco, GPU).
+- Perfiles de rendimiento: `performance`, `balanced`, `lightweight` (`jarvis profile`).
+- Onboarding guiado (`jarvis onboard`) y flag `app.onboarding_completed`.
+- Privacidad: exportar datos, borrar memoria completa, modo privacidad (`jarvis privacy`).
+- Instalador macOS: bundle `.app` mejorado + script `create_dmg.sh`.
+- Checklist de Mac limpio y `RELEASE_REPORT.md`.
+- Comando de voz: «elimina todo lo que recuerdas de mí».
+
+### Cambiado
+
+- Versión de producto: **Jarvis 1.0.0-rc.1** (Release Candidate).
+- GUI: pestaña Release (perfiles + doctor resumen) y onboarding en primer arranque.
+
+### Seguridad
+
+- Auditoría de privacidad previa a release.
+- Modo privacidad reduce retención de contexto en sesión.
+
+## [0.1.0] — 2026-07-27
+
+### Añadido
+
+- Fases 0–8: voz, memoria, skills, RAG, automatización, visión, GUI, hardening.
+- Plugins, Model Manager, backup, autostart, Secret Manager.
+
+----- FILE: RELEASE_NOTES.md -----
+      63 RELEASE_NOTES.md
+# Jarvis 1.0.0-rc.1 — Release Notes
+
+**Producto:** Jarvis  
+**Versión:** 1.0.0-rc.1 (Release Candidate)  
+**Fecha:** 2026-07-27  
+**Estado:** Candidato a producción — validar en Mac limpio antes de 1.0.0 final.
+
+## Qué es Jarvis
+
+Asistente de voz personal **local-first** para macOS (Windows/Linux en evolución):
+
+- Wake word «Hey Jarvis»
+- STT → LLM local (Ollama) → TTS
+- Memoria, RAG con citas, skills/plugins
+- Automatización OS con permisos
+- Visión / OCR
+- GUI de escritorio
+- Backups, doctor, perfiles de rendimiento
+
+## Cómo instalar (RC)
+
+```bash
+cd ~/jarvis
+./scripts/install_macos.sh
+poetry install -E gui
+poetry run jarvis onboard
+poetry run jarvis doctor
+poetry run jarvis gui
+```
+
+Bundle / DMG (desarrollo):
+
+```bash
+./scripts/create_app_bundle.sh ~/Applications/Jarvis.app
+./scripts/create_dmg.sh
+```
+
+## Novedades de este RC
+
+1. Versionado semántico y notas de release.
+
+----- FILE: README.md -----
+     129 README.md
+# Jarvis — Asistente de voz local-first
+
+Wake word **Hey Jarvis** · Python 3.12+ · Poetry · Clean Architecture
+
+## Estado
+
+| Fase | Estado |
+|------|--------|
+| 0 — Cimientos | Completa |
+| 1 — Voz | Completa |
+| 2 — Memoria | Completa |
+| 3 — Skills | Completa |
+| 4 — RAG / conocimiento | Completa |
+| 5 — Automatización OS | Completa |
+| 6 — Visión / OCR | Completa |
+| 7 — GUI / bandeja | Completa |
+| 8 — Producción / hardening | Completa |
+| 9 — Release Candidate | **1.0.0-rc.1** |
+
+## Arranque (Fase 1–5)
+
+Requisito: **Python 3.12** (`brew install python@3.12`).
+
+```bash
+cd ~/jarvis
+./scripts/install.sh
+ollama pull llama3.2:3b
+ollama pull nomic-embed-text
+poetry run jarvis --health
+```
+
+### Automatización (Fase 5)
+
+```bash
+poetry run jarvis --once-text "Abre Visual Studio Code."
+poetry run jarvis --once-text "Copia este texto al portapapeles: hola"
+poetry run jarvis --once-text "Abre OpenAI en el navegador."
+# Playwright opcional:
+# poetry install -E automation && poetry run playwright install chromium
+```
+
+----- FILE: CONTEXTO-JARVIS.md -----
+      60 CONTEXTO-JARVIS.md
+# CONTEXTO JARVIS
+
+## Regla de oro
+
+**Todo debe seguir funcionando OFFLINE.**  
+Nada de APIs de nube para voz, inteligencia ni STT/TTS en el camino crítico.
+
+| Permitido (local) | Prohibido (nube) |
+|---|---|
+| Kokoro / mlx-audio | ElevenLabs |
+| Piper TTS | OpenAI TTS / Whisper API |
+| faster-whisper (local) | Azure / Google Cloud Speech |
+| Ollama (local) | ChatGPT / Claude API como cerebro principal |
+| n8n en localhost | Servicios SaaS obligatorios |
+
+## Stack actual
+
+- **STT:** faster-whisper (`small`, CPU)
+- **Wake word:** openwakeword (`hey_jarvis`)
+- **Cerebro:** Ollama + n8n (`http://localhost:5678/webhook/jarvis`)
+- **TTS:** Kokoro (`mlx-community/Kokoro-82M-bf16`)
+- **Voz por defecto:** `em_santa`  
+  Alternativas locales: `em_alex` (masc), `ef_dora` (fem)
+
+## Archivos principales
+
+- `jarvis_pro.py` — **usar este**: Hey Jarvis / aplauso + Kokoro en memoria
+- `jarvis_voz.py` — grabación manual (Enter) — NO tiene wake word
+- `jarvis.py` — versión base
+- `~/Desktop/Jarvis.command` — atajo que debe lanzar `jarvis_pro.py`
+- `venv/` — entorno Python
+
+## Cómo activarlo en el Mac
+
+1. Micrófono: Ajustes → Privacidad → Micrófono → Terminal/Cursor permitidos
+2. Doble clic en `Desktop/Jarvis.command` (o `cd ~/jarvis && source venv/bin/activate && python jarvis_pro.py`)
+3. Di **"Hey Jarvis"** con J inglesa (como *jungle*), no “yarvis”
+4. Espera el *ding*, da la orden, calla ~1.5 s
+5. Diagnóstico: `python test_wakeword.py` (mira el score al decir Hey Jarvis)
+
+
+----- FILE: docs/INSTRUCCIONES-CLAUDE-EVAL.md -----
+     179 docs/INSTRUCCIONES-CLAUDE-EVAL.md
+# Instrucciones para Claude — Organizar y evaluar Jarvis
+
+Úsalas como system/user prompt al abrir una sesión nueva sobre el repo `~/jarvis`.
+
+---
+
+## Rol
+
+Eres un **auditor técnico y organizador de producto** de Jarvis (asistente de voz local-first).  
+Tu trabajo es **organizar, evaluar y reportar**. No inventes fases nuevas ni promociones de versión.
+
+## Ubicación del proyecto
+
+```text
+/Users/juanlizamah/jarvis
+```
+
+Python **3.12** + Poetry. Entrypoint: `poetry run jarvis` / `python -m jarvis`.
+
+## Estado de release (INMUTABLE hasta aviso del usuario)
+
+```text
+Jarvis 1.0.0-rc.1
+✅ Fases 0–9 completadas
+✅ Validación automatizada PASS (docs/RELEASE_VALIDATION_LOG.md)
+✅ Release Candidate generado (dist/Jarvis-1.0.0-rc.1.dmg)
+⏳ CLEAN_MAC_CHECKLIST.md → PENDING
+🔒 Tag v1.0.0 BLOQUEADO
+🔒 Fase 10 (multiagente) BLOQUEADA
+```
+
+### Prohibiciones
+
+- NO cambiar `VERSION` a `1.0.0`.
+- NO crear ni pushear tag `v1.0.0`.
+- NO iniciar Fase 10 ni multiagente.
+- NO romper el camino crítico offline (Ollama local, STT/TTS locales).
+- NO avanzar fases sin aprobación explícita del usuario.
+- Solo si el usuario escribe literalmente `CLEAN_MAC_CHECKLIST.md → PASS` → entonces sí promover a v1.0.0.
+
+
+===== config/config.yaml app+security (sin secretos) =====
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'yaml'
+
+===== FIN BUNDLE =====

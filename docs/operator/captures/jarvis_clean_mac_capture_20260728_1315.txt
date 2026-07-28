@@ -1,0 +1,171 @@
+JARVIS CLEAN MAC CAPTURE
+generated_at=2026-07-28T17:15:53Z
+host=MacBook-Pro-de-Juan.local
+user=juanlizamah
+macos=ProductName:		macOS ProductVersion:		26.5.2 BuildVersion:		25F84 
+expected_anchor=741dd825567f17deb1a76d7dc9837b86fc12d24e
+expected_sha256=aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
+
+===== PASO -1a: inventario sistema (alcance PASS / P1-5) =====
+/opt/homebrew/bin/ollama
+/opt/homebrew/bin/ollama
+/opt/homebrew/bin/brew
+/opt/homebrew/bin/brew
+/opt/homebrew/bin/python3
+/opt/homebrew/bin/python3
+/usr/bin/python3
+ls: /Applications/Ollama.app: No such file or directory
+/opt/homebrew
+blobs
+manifests
+
+===== PASO -1b: residuos Jarvis =====
+ls: /Users/juanlizamah/.jarvis: No such file or directory
+ls: /Users/juanlizamah/Library/Application Support/*[Jj]arvis*: No such file or directory
+ls: /Users/juanlizamah/Library/Caches/*[Jj]arvis*: No such file or directory
+ls: /Users/juanlizamah/Library/Logs/*[Jj]arvis*: No such file or directory
+ls: /Users/juanlizamah/Library/Preferences/*[Jj]arvis*: No such file or directory
+/Users/juanlizamah/Applications/Jarvis.app
+
+===== PASO -1 (legacy paths) =====
+--- which ollama ---
+/opt/homebrew/bin/ollama
+--- ollama list ---
+NAME                       ID              SIZE      MODIFIED     
+nomic-embed-text:latest    0a109f422b47    274 MB    20 hours ago    
+llama3.2:3b                a80c4f17acd5    2.0 GB    3 days ago      
+--- which tesseract ---
+--- ls ~/.jarvis ---
+ls: /Users/juanlizamah/.jarvis: No such file or directory
+--- ls Application Support/Jarvis ---
+ls: /Users/juanlizamah/Library/Application Support/Jarvis: No such file or directory
+
+===== PASO 0: SHA-256 del DMG =====
+dmg_path=/Users/juanlizamah/jarvis/dist/Jarvis-1.0.0-rc.1.dmg
+sha256_actual=aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
+sha256_match=YES
+
+===== jarvis binary (¿DMG o repo de desarrollo?) =====
+jarvis_cmd=poetry run jarvis
+
+===== jarvis --version =====
+The currently activated Python version 3.14.6 is not supported by the project (>=3.12,<3.13).
+Trying to find and use a compatible version. 
+Using python3.12 (3.12.13)
+Creating virtualenv jarvis-bEVZkWHD-py3.12 in /var/folders/wh/1zszv0hs2d3d9syy8fc9rncr0000gn/T/cursor-sandbox-cache/7d49d1de00481da7e1d56060b02ce50a/poetry/virtualenvs
+Warning: 'jarvis' is an entry point defined in pyproject.toml, but it's not installed as a script. You may get improper `sys.argv[0]`.
+
+The support to run uninstalled scripts will be removed in a future release.
+
+Run `poetry install` to resolve and get rid of this message.
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'jarvis'
+
+===== jarvis doctor =====
+The currently activated Python version 3.14.6 is not supported by the project (>=3.12,<3.13).
+Trying to find and use a compatible version. 
+Using python3.12 (3.12.13)
+Warning: 'jarvis' is an entry point defined in pyproject.toml, but it's not installed as a script. You may get improper `sys.argv[0]`.
+
+The support to run uninstalled scripts will be removed in a future release.
+
+Run `poetry install` to resolve and get rid of this message.
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'jarvis'
+
+===== jarvis --health =====
+The currently activated Python version 3.14.6 is not supported by the project (>=3.12,<3.13).
+Trying to find and use a compatible version. 
+Using python3.12 (3.12.13)
+Warning: 'jarvis' is an entry point defined in pyproject.toml, but it's not installed as a script. You may get improper `sys.argv[0]`.
+
+The support to run uninstalled scripts will be removed in a future release.
+
+Run `poetry install` to resolve and get rid of this message.
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'jarvis'
+
+===== doctor standalone (PASS/FAIL estilo) =====
+==================================================
+JARVIS DOCTOR (standalone) — 1.0.0-rc.1
+==================================================
+[PASS] Ollama responde (127.0.0.1:11434) -> 200
+[PASS] Modelo llama3.2 disponible -> nomic-embed-text:latest, llama3.2:3b
+[PASS] Modelo nomic-embed-text disponible -> nomic-embed-text:latest, llama3.2:3b
+[WARN] Modelo llava (visión opt-in) -> ausente = Vision degraded OK para 1.0.0 base
+[WARN] tesseract en PATH (visión opt-in) -> ausente = OK para PASS base
+[PASS] n8n responde (opcional) -> ok
+[PASS] Existe VERSION -> /Users/juanlizamah/jarvis/VERSION
+[PASS] VERSION es 1.0.0-rc.1 -> 1.0.0-rc.1
+[PASS] Existe src/jarvis/__main__.py -> /Users/juanlizamah/jarvis/src/jarvis
+[PASS] Existe config/config.yaml
+[PASS] Sonido ding del sistema
+[FAIL] Whisper / faster_whisper (STT) instalado -> No module named 'faster_whisper'
+[FAIL] openwakeword (wake) instalado -> No module named 'openwakeword'
+[WARN] Kokoro/mlx-audio (TTS) instalado -> No module named 'mlx_audio'
+[FAIL] sounddevice (audio I/O) instalado -> No module named 'sounddevice'
+[FAIL] numpy instalado -> No module named 'numpy'
+...probando micrófono 1s...
+[WARN] Micrófono capta señal -> No module named 'numpy'
+[FAIL] jarvis --health ejecuta -> rc=1
+[PASS] jarvis --health no miente (P0-2) -> ok
+[WARN] Vision degraded/off esperado sin llava -> sin línea Vision
+==================================================
+CRITICOS: 7/12 PASS · WARN=5
+RESULTADO: HAY FALLOS CRITICOS ARRIBA
+==================================================
+Nota: n8n y jarvis_pro.py NO son requisitos del RC. Visión opt-in: WARN sin llava/tesseract es OK.
+
+===== NOTAS DEL OPERADOR (rellenar) =====
+checklist_result=PENDING   # PASS | FAIL | PENDING
+voice_e2e=                 # OK | FAIL
+memory_persist=            # OK | FAIL
+rag=                       # OK | FAIL
+skill=                     # OK | FAIL
+screenshot_automation=     # OK | FAIL
+backup_restore=            # OK | FAIL
+vision_health_line=        # pegar la línea Vision: ...
+ollama_preexistente=
+homebrew_preexistente=
+tesseract_preexistente=
+P1-5_cold_start_instalador=ABIERTO_si_Camino_B
+machine_notes=
+
+===== FIN =====
+Pega este archivo completo en el chat (Cursor/Claude) con PASS o FAIL.

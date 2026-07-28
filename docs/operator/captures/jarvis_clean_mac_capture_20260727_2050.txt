@@ -1,0 +1,87 @@
+JARVIS CLEAN MAC CAPTURE
+generated_at=2026-07-28T00:50:47Z
+host=MacBook-Pro-de-Juan.local
+user=juanlizamah
+macos=ProductName:		macOS ProductVersion:		26.5.2 BuildVersion:		25F84 
+expected_anchor=741dd825567f17deb1a76d7dc9837b86fc12d24e
+expected_sha256=aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
+
+===== PASO -1: pre-check Mac limpio =====
+--- which ollama ---
+/opt/homebrew/bin/ollama
+--- ollama list ---
+NAME                       ID              SIZE      MODIFIED    
+nomic-embed-text:latest    0a109f422b47    274 MB    4 hours ago    
+llama3.2:3b                a80c4f17acd5    2.0 GB    2 days ago     
+--- which tesseract ---
+--- ls ~/.jarvis ---
+ls: /Users/juanlizamah/.jarvis: No such file or directory
+--- ls Application Support/Jarvis ---
+ls: /Users/juanlizamah/Library/Application Support/Jarvis: No such file or directory
+
+===== PASO 0: SHA-256 del DMG =====
+dmg_path=/Users/juanlizamah/jarvis/dist/Jarvis-1.0.0-rc.1.dmg
+sha256_actual=aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
+sha256_match=YES
+
+===== jarvis binary =====
+jarvis_cmd=poetry run jarvis
+
+===== jarvis --version =====
+++ poetry run jarvis --version
+1.0.0-rc.1
+
+===== jarvis doctor =====
+++ poetry run jarvis doctor
+[1mHTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"[0m
+[1mHTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"[0m
+Jarvis doctor — v1.0.0-rc.1
+
+✓ Config: Usuario=Juan perfil=balanced
+✓ Python: Python 3.12.13
+✓ Dependencias: Núcleo instalado
+✓ Ollama: Activo (2 modelos)
+✓ Modelo LLM: llama3.2:3b
+✓ Modelo Embeddings: nomic-embed-text
+⚠ Modelo Vision: Missing model: llava
+    → ollama pull llava
+✓ Memory DB: SQLite OK
+✓ Chroma: Disponible (memory, rag)
+✓ RAG: Activo (2 archivos en knowledge/)
+⚠ Vision: tesseract no está en PATH
+    → brew install tesseract tesseract-lang
+✓ Audio: 3 micrófono(s) detectado(s)
+⚠ Permisos: Verifica Micrófono, Pantalla, Accesibilidad y Notificaciones en Ajustes
+    → System Settings → Privacy & Security
+✓ Disco: 52.9 GB libres
+✓ GPU: Apple / Metal disponible (RAM 18 GB)
+
+Resumen: 12 ok · 3 warn · 0 fail
+
+===== jarvis --health =====
+++ poetry run jarvis --health
+[1mHTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"[0m
+[2m2026-07-28T00:50:52.238269Z[0m [[32m[1minfo     [0m] [1mhealthcheck                   [0m [[0m[1m[34mjarvis.health[0m][0m [36mconfig_yaml[0m=[35mTrue[0m [36mllm_provider[0m=[35mTrue[0m [36mproject_root[0m=[35mTrue[0m [36mtts_default[0m=[35mTrue[0m [36mversion[0m=[35m1.0.0-rc.1[0m [36mvision_runtime[0m=[35mFalse[0m [36mvision_status[0m=[35mdegraded[0m
+Jarvis 1.0.0-rc.1 OK — Juan
+  LLM: ollama/llama3.2:3b
+  TTS: kokoro/em_santa
+  Wake: openwakeword/hey_jarvis
+  RAG: on (top_k=5)
+  Automation: on (system_open)
+  Vision: degraded (config on; faltan: modelo llava, tesseract (ollama/llava, ocr=tesseract))
+  GUI: on (qt)
+  Follow-up: 6.0s
+
+===== NOTAS DEL OPERADOR (rellenar) =====
+checklist_result=PENDING   # PASS | FAIL | PENDING
+voice_e2e=                 # OK | FAIL
+memory_persist=            # OK | FAIL
+rag=                       # OK | FAIL
+skill=                     # OK | FAIL
+screenshot_automation=     # OK | FAIL
+backup_restore=            # OK | FAIL
+vision_health_line=        # pegar la línea Vision: ...
+machine_notes=
+
+===== FIN =====
+Pega este archivo completo en el chat (Cursor/Claude) con PASS o FAIL.

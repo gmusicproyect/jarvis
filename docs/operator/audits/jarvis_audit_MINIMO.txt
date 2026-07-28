@@ -1,0 +1,72 @@
+JARVIS AUDIT MINIMO — evidencia real de /Users/juanlizamah/jarvis
+generated_at=2026-07-27T23:00:35Z
+
+===== VERSION file =====
+1.0.0-rc.1
+
+===== jarvis --version =====
+1.0.0-rc.1
+
+===== jarvis doctor =====
+[1mHTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"[0m
+[1mHTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"[0m
+Jarvis doctor — v1.0.0-rc.1
+
+✓ Config: Usuario=Juan perfil=balanced
+✓ Python: Python 3.12.13
+✓ Dependencias: Núcleo instalado
+✓ Ollama: Activo (2 modelos)
+✓ Modelo LLM: llama3.2:3b
+✓ Modelo Embeddings: nomic-embed-text
+⚠ Modelo Vision: Missing model: llava
+    → ollama pull llava
+✓ Memory DB: SQLite OK
+✓ Chroma: Disponible (memory, rag)
+✓ RAG: Activo (2 archivos en knowledge/)
+⚠ Vision: tesseract no está en PATH
+    → brew install tesseract tesseract-lang
+✓ Audio: 3 micrófono(s) detectado(s)
+⚠ Permisos: Verifica Micrófono, Pantalla, Accesibilidad y Notificaciones en Ajustes
+    → System Settings → Privacy & Security
+✓ Disco: 56.0 GB libres
+✓ GPU: Apple / Metal disponible (RAM 18 GB)
+
+Resumen: 12 ok · 3 warn · 0 fail
+
+===== jarvis --health =====
+[2m2026-07-27T23:00:39.832493Z[0m [[32m[1minfo     [0m] [1mhealthcheck                   [0m [[0m[1m[34mjarvis.health[0m][0m [36mconfig_yaml[0m=[35mTrue[0m [36mllm_provider[0m=[35mTrue[0m [36mproject_root[0m=[35mTrue[0m [36mtts_default[0m=[35mTrue[0m [36mversion[0m=[35m1.0.0-rc.1[0m
+Jarvis 1.0.0-rc.1 OK — Juan
+  LLM: ollama/llama3.2:3b
+  TTS: kokoro/em_santa
+  Wake: openwakeword/hey_jarvis
+  RAG: on (top_k=5)
+  Automation: on (system_open)
+  Vision: on (ollama/llava, ocr=tesseract)
+  GUI: on (qt)
+  Follow-up: 6.0s
+
+===== pytest (cola) =====
+........................................................................ [ 97%]
+..                                                                       [100%]
+=============================== warnings summary ===============================
+tests/unit/test_vision.py::test_save_to_knowledge
+  /private/var/folders/wh/1zszv0hs2d3d9syy8fc9rncr0000gn/T/cursor-sandbox-cache/ad65f122330af5bea7df0e33b0c7ebca/poetry/virtualenvs/jarvis-bEVZkWHD-py3.12/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'validate_default' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'validate_default' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+    warnings.warn(
+
+tests/unit/test_vision.py::test_save_to_knowledge
+tests/unit/test_vision.py::test_save_to_knowledge
+tests/unit/test_vision.py::test_save_to_knowledge
+  /private/var/folders/wh/1zszv0hs2d3d9syy8fc9rncr0000gn/T/cursor-sandbox-cache/ad65f122330af5bea7df0e33b0c7ebca/poetry/virtualenvs/jarvis-bEVZkWHD-py3.12/lib/python3.12/site-packages/chromadb/types.py:144: PydanticDeprecatedSince211: Accessing the 'model_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+    return self.model_fields  # pydantic 2.x
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+
+===== dist/ =====
+total 1112
+-rw-r--r--@ 1 juanlizamah  staff   554K Jul 27 18:15 Jarvis-1.0.0-rc.1.dmg
+
+===== release status (inmutable) =====
+CLEAN_MAC_CHECKLIST: PENDING
+tag v1.0.0: BLOCKED
+Phase 10: BLOCKED
+automated validation: PASS (see RELEASE_VALIDATION_LOG)
