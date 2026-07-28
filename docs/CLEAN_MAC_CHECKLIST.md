@@ -71,6 +71,15 @@ Marcado por: ____________  Fecha: __________  Máquina: __________
 
 **Quién marca PASS:** solo el operador humano en hardware real. Ni Cursor ni Claude pueden ejecutar ni firmar este checklist.
 
+**Captura automática de evidencias** (antes y/o después de instalar):
+
+```bash
+# Desde el repo o JarvisSource del DMG:
+chmod +x scripts/clean_mac_capture.sh
+./scripts/clean_mac_capture.sh /ruta/Jarvis-1.0.0-rc.1.dmg
+# → ~/Desktop/jarvis_clean_mac_capture_*.txt  (pegar ese archivo al volver)
+```
+
 **Versión bajo prueba:** `1.0.0-rc.1`  
 **Estado release:** ⬜ **NO PASS** — promoción a `v1.0.0` bloqueada  
 **Validación automatizada (estación de desarrollo):** ✅ `READY_FOR_CLEAN_MAC` — ver `RELEASE_VALIDATION_LOG.md`
