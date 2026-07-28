@@ -1,23 +1,31 @@
 # Release validation log
 
-## Ancla de código (P0-1 cerrado)
+## Artefacto anclado (build post P1-1)
 
-| Campo | Valor |
-|-------|--------|
-| Commit | `2f4fb71` (`2f4fb711e0a3849c132bf41ce44c2fb4608376ca`) |
-| Mensaje | chore(release): anclar árbol de Fases 0-9 en 1.0.0-rc.1 |
-| VERSION | 1.0.0-rc.1 (sin cambio) |
-| Tags | ninguna |
-| Unit tests post P0-2 | **75 passed** |
-| `--health` Vision | `degraded` cuando faltan llava/tesseract |
+```text
+Artefacto:     dist/Jarvis-1.0.0-rc.1.dmg (612K)
+Commit ancla:  741dd82 (741dd825567f17deb1a76d7dc9837b86fc12d24e)
+Árbol:         limpio en el momento del build (docs visión opt-in incluidos)
+SHA-256:       aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
+Huella local:  ~/Desktop/jarvis_rc1_dmg.sha256
+Tests:         75 passed — tests/unit/
+Cobertura:     ~49% líneas (jarvis) — unit only; no E2E voz
+Doctor:        12 ok · 3 warn · 0 fail (llava, tesseract, permisos macOS)
+Health:        Vision: degraded — reporta runtime real (P0-2 cerrado)
+Visión 1.0.0:  OPT-IN — degraded = PASS del camino base (P1-1 cerrado)
+release_validate.sh: PASS (17 PASS / 1 WARN / 0 FAIL)
+Mac limpio:    PENDING
+Tag v1.0.0:    no creada — bloqueada
+Fase 10:       bloqueada
+```
 
-Re-ejecutar `./scripts/release_validate.sh` y regenerar DMG **desde este hash** antes del Mac limpio.
+Log crudo de validación: `~/Desktop/release_validate_741dd82.log`
 
 ---
 
 | Campo | Valor |
 |-------|--------|
-| Fecha UTC | 2026-07-27T22:11:13Z |
+| Fecha UTC | 2026-07-28T00:13:07Z |
 | Versión | 1.0.0-rc.1 |
 | PASS | 17 |
 | WARN | 1 |
@@ -28,57 +36,39 @@ Re-ejecutar `./scripts/release_validate.sh` y regenerar DMG **desde este hash** 
 | Estado | Check | Detalle |
 |--------|-------|---------|
 | PASS | version | 1.0.0-rc.1 |
-| WARN | doctor | advertencias (exit 1) â€” ver salida |
-| PASS | doctor-no-critical | sin fallos crÃ­ticos |
+| WARN | doctor | advertencias (exit 1) — ver salida |
+| PASS | doctor-no-critical | sin fallos críticos |
 | PASS | snapshot-before | capturado |
-| PASS | backup-create | /Users/juanlizamah/jarvis/data/backups/jarvis-backup-20260727-181117-release-validate.zip |
-| PASS | happy:hora | Jarvis: Son las 18:11 del lunes 27 de julio de 2026. |
-| PASS | happy:memoria | Jarvis: Queda anotado en mi memoria. |
-| PASS | happy:rag | Jarvis: Â¿QuÃ© archivo o carpeta busco? |
-| PASS | happy:app | Jarvis: No pude calcular eso. |
-| PASS | happy:screenshot | Jarvis: Captura guardada en /Users/juanlizamah/jarvis/data/screenshots/jarvis-shot-20260727-181207.png. |
-| PASS | happy:vision | respuesta recibida |
-| PASS | privacy-export | /Users/juanlizamah/jarvis/data/exports/jarvis-export-20260727-221238.json |
-| PASS | privacy-wipe | items 4 â†’ 0 |
-| PASS | backup-restore | memoria tras restore=3 (antes wipe=4) |
+| PASS | backup-create | data/backups/…-release-validate.zip |
+| PASS | happy:hora | respuesta hablable |
+| PASS | happy:memoria | recuerdo guardado |
+| PASS | happy:rag | respuesta con contexto de knowledge/ |
+| PASS | happy:app | intento open_application (TextEdit; wording frágil) |
+| PASS | happy:screenshot | captura guardada |
+| PASS | happy:vision | respuesta recibida (degraded OK) |
+| PASS | privacy-export | JSON exportado |
+| PASS | privacy-wipe | items ? 0 |
+| PASS | backup-restore | memoria restaurada |
 | PASS | snapshot-after-restore | config/plugins/chroma presentes |
-| PASS | resolve-python | /var/folders/wh/1zszv0hs2d3d9syy8fc9rncr0000gn/T/cursor-sandbox-cache/ad65f122330af5bea7df0e33b0c7ebca/poetry/virtualenvs/jarvis-bEVZkWHD-py3.12/bin/python |
-| PASS | unit-tests |  |
+| PASS | resolve-python | intérprete con jarvis |
+| PASS | unit-tests | 75 passed |
 | PASS | dmg-artifact | dist/Jarvis-1.0.0-rc.1.dmg |
 
 ## Doctor (extracto)
 
 ```
-[1mHTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"[0m
-[1mHTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"[0m
-Jarvis doctor â€” v1.0.0-rc.1
-
-âœ“ Config: Usuario=Juan perfil=balanced
-âœ“ Python: Python 3.12.13
-âœ“ Dependencias: NÃºcleo instalado
-âœ“ Ollama: Activo (2 modelos)
-âœ“ Modelo LLM: llama3.2:3b
-âœ“ Modelo Embeddings: nomic-embed-text
-âš  Modelo Vision: Missing model: llava
-    â†’ ollama pull llava
-âœ“ Memory DB: SQLite OK
-âœ“ Chroma: Disponible (memory, rag)
-âœ“ RAG: Activo (2 archivos en knowledge/)
-âš  Vision: tesseract no estÃ¡ en PATH
-    â†’ brew install tesseract tesseract-lang
-âœ“ Audio: 3 micrÃ³fono(s) detectado(s)
-âš  Permisos: Verifica MicrÃ³fono, Pantalla, Accesibilidad y Notificaciones en Ajustes
-    â†’ System Settings â†’ Privacy & Security
-âœ“ Disco: 56.1 GB libres
-âœ“ GPU: Apple / Metal disponible (RAM 18 GB)
-
-Resumen: 12 ok Â· 3 warn Â· 0 fail
+? Config / Python 3.12 / Dependencias / Ollama
+? LLM llama3.2:3b / Embeddings nomic-embed-text
+? Missing model: llava
+? tesseract no está en PATH
+? Permisos macOS (checklist manual)
+Resumen: 12 ok · 3 warn · 0 fail
 ```
 
 ## Mac limpio / firma
 
-- Mac limpio manual: **PENDIENTE** (ver CLEAN_MAC_CHECKLIST.md)
-- Firma/notarizaciÃ³n: **PENDIENTE** salvo `JARVIS_CODESIGN_ID`
-- PromociÃ³n a 1.0.0: **BLOQUEADA** mientras FAIL>0 o Mac limpio â‰  PASS
+- Mac limpio manual: **PENDING** (`docs/CLEAN_MAC_CHECKLIST.md`)
+- Firma/notarización: PENDING salvo `JARVIS_CODESIGN_ID`
+- Promoción a 1.0.0: **BLOQUEADA** hasta PASS del checklist
 
-**Veredicto automatizado:** READY_FOR_CLEAN_MAC (no es PASS de release todavÃ­a).
+**Veredicto automatizado:** READY_FOR_CLEAN_MAC (no es PASS de release todavía).
