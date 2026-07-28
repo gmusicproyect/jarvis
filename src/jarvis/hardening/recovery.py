@@ -22,7 +22,7 @@ class ResilientTTS:
         self.active = primary
         self.name = getattr(primary, "name", "tts")
 
-    def speak(self, text: str) -> None:
+    def speak(self, text: str, *, cancel_flag: list[bool] | None = None) -> None:
         providers = [self.active, self.primary, *self.fallbacks]
         seen: set[int] = set()
         last_exc: Exception | None = None
@@ -31,7 +31,12 @@ class ResilientTTS:
                 continue
             seen.add(id(provider))
             try:
-                provider.speak(text)
+                # Pasar cancel_flag si el provider lo soporta (Kokoro/SystemTTS);
+                # providers de test pueden solo aceptar text.
+                try:
+                    provider.speak(text, cancel_flag=cancel_flag)
+                except TypeError:
+                    provider.speak(text)
                 self.active = provider
                 return
             except Exception as exc:  # noqa: BLE001

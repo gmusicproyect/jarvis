@@ -63,6 +63,23 @@ def test_resilient_tts_fallback() -> None:
     assert good.said == "hola"
 
 
+def test_resilient_tts_forwards_cancel_flag() -> None:
+    class Tracking:
+        def __init__(self) -> None:
+            self.got_flag = None
+
+        def speak(self, text: str, *, cancel_flag=None) -> None:  # noqa: ANN001
+            self.got_flag = cancel_flag
+
+        def stop(self) -> None:
+            return None
+
+    primary = Tracking()
+    flag = [False]
+    ResilientTTS(primary).speak("hola", cancel_flag=flag)
+    assert primary.got_flag is flag
+
+
 def test_plugin_manifest_and_list(tmp_path: Path) -> None:
     root = tmp_path / "plugins"
     plug = root / "demo"
