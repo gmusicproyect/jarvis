@@ -1,57 +1,33 @@
 # Release validation log
 
-## Artefacto anclado (post P0-3 — Install.command DMG RO)
+## Artefacto anclado (post P1-A + P0-5 TTS)
 
 ```text
-Artefacto:     dist/Jarvis-1.0.0-rc.1.dmg (728K)
-Commit ancla:  bbffcb3 (bbffcb3441cc308d9ca6f8bc228ad1382e930b9d)
-Ancla previa:  741dd82 / aebebe24… — FAIL 2026-07-28:
-               mkdir Read-only en /Volumes/.../JarvisSource/.runtime (P0-3)
-SHA-256:       b8b42f0f492f792d8bd8424be45459977bfe01a6dc0522bcc52cc924955f1763
+Artefacto:     dist/Jarvis-1.0.0-rc.1.dmg (731K)
+Commit ancla:  910d3dc (910d3dcbdf080a57a632de28bcdb878a36889418)
+Contiene:      P0-3 Install RO · P0-4 .app python.path · P0-5 TTS cancel_flag
+               P1-A DMG sin Jarvis.app/Applications horneados
+SHA-256:       44ba93a379f076d9f347d8b6ae496528f868d4e19b25d1e2acd787b2b5c16851
 Huella local:  ~/Desktop/jarvis_rc1_dmg.sha256
-Fix:           install_standalone copia a Application Support si origen es DMG/RO
-Mac limpio:    PENDING — reintentar con este DMG (eject volumen viejo primero)
-P1-2/P1-3/P1-5: ABIERTOS (P1-5 tras PASS Camino B)
-Tag v1.0.0:    no creada — bloqueada
-Fase 10:       bloqueada
+Contenido DMG: Install.command + JarvisSource + LEEME (sin .app arrastrable)
+Mac limpio:    PENDING — instalación fresca sobre ESTE artefacto
+P1-B:          Verificar que "Hey Jarvis" dispara (no solo aplauso)
+P1-2/P1-3/P1-5: ABIERTOS
+Tag v1.0.0:    BLOQUEADA
+Fase 10:       BLOQUEADA
 ```
 
-## Sesión FAIL (artefacto anterior)
+## Anclas superadas (no usar)
 
-```text
-Fecha:         2026-07-28 ~13:20 local
-DMG:           741dd82 / aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
-Síntoma:       Install.command ? mkdir: .../JarvisSource/.runtime: Read-only file system
-Resultado:     FAIL — no instalar ese DMG; usar bbffcb3 / b8b42f0f…
-```
-
-Log crudo de validación automatizada (histórico): `~/Desktop/release_validate_741dd82.log`
-
----
-
-| Campo | Valor |
-|-------|--------|
-| Fecha UTC | 2026-07-28T17:22:00Z (rebuild P0-3) |
-| Versión | 1.0.0-rc.1 |
-| Ancla | bbffcb3 |
-| SHA-256 | b8b42f0f492f792d8bd8424be45459977bfe01a6dc0522bcc52cc924955f1763 |
-
-## Resultados
-
-Validación automatizada del ancla previo (`741dd82`) sigue archivada abajo como histórico.
-La validación manual debe usar **solo** el DMG `b8b42f0f…`.
-
-### Histórico release_validate (741dd82)
-
-| Estado | Check | Detalle |
-|--------|-------|---------|
-| PASS | (17 checks) | Ver log crudo en Desktop |
-| WARN | 1 | (archivado) |
-| FAIL | 0 | |
+| Ancla | SHA-256 (corto) | Motivo |
+|-------|-----------------|--------|
+| 741dd82 | aebebe24… | Install RO (P0-3) |
+| bbffcb3 | b8b42f0f… | .app sin fix completo |
+| 2b1ea98 | d1cc8cbc… | sin TTS cancel_flag (P0-5) ni P1-A |
 
 ## Gates
 
-- Mac limpio manual: **PENDING** (`docs/CLEAN_MAC_CHECKLIST.md`) — tarjeta nueva tras P0-3
-- Firma/notarización: PENDING salvo `JARVIS_CODESIGN_ID`
+- Mac limpio manual: **PENDING** (`docs/CLEAN_MAC_CHECKLIST.md`)
+- Firma/notarización: PENDING
 - Tag `v1.0.0`: BLOCKED
 - Fase 10: BLOCKED

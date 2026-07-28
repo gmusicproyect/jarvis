@@ -19,11 +19,10 @@ Phase 10: BLOCKED
 
 ```text
 ARTEFACTO BAJO VALIDACIÓN
-  Archivo:       Jarvis-1.0.0-rc.1.dmg  (728K)
-  Commit ancla:  2b1ea98 (fix .app python.path / kLSNoExecutableErr)
-  SHA-256:       d1cc8cbcf2484463e40817023b1426edee892765b7c2d98205a875528b399210
-  Nota: instalación actual en esta Mac ya es válida (venv App Support);
-        el DMG nuevo es para reinstalaciones / capturar Install limpio.
+  Archivo:       Jarvis-1.0.0-rc.1.dmg  (731K)
+  Commit ancla:  910d3dcbdf080a57a632de28bcdb878a36889418
+  SHA-256:       44ba93a379f076d9f347d8b6ae496528f868d4e19b25d1e2acd787b2b5c16851
+  Nota: incluye P0-3/4/5 + P1-A (DMG sin .app arrastrable). Verificar P1-B wake.
 
 QUÉ CUENTA COMO "FRESCO" (no hace falta Mac nueva)
   Preferir: cuenta de macOS NUEVA (limpia por construcción).
@@ -52,7 +51,7 @@ PASO -1b — Residuos Jarvis (debe salir vacío antes de instalar)
 
 PASO 0 — SHA-256 del DMG
   shasum -a 256 <ruta>/Jarvis-1.0.0-rc.1.dmg
-  Debe ser: d1cc8cbcf2484463e40817023b1426edee892765b7c2d98205a875528b399210
+  Debe ser: 44ba93a379f076d9f347d8b6ae496528f868d4e19b25d1e2acd787b2b5c16851
   Si no coincide → FAIL, no instalar.
 
 PASO 1 — Instalar desde el DMG (no desde poetry run en el repo)
