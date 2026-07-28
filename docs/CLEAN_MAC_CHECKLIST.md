@@ -25,8 +25,9 @@ Phase 10: BLOCKED
 1. Abrir `dist/Jarvis-1.0.0-rc.1.dmg` en un Mac limpio.
 2. Ejecutar `Install.command`.
 3. Completar instalación, permisos macOS, Ollama/modelos y onboarding.
-4. Probar flujo crítico (voz, memoria, RAG, skills, captura, visión, backup/restore).
-5. Marcar este documento → **PASS**.
+4. Probar flujo crítico (voz, memoria, RAG, skills, captura, backup/restore).
+5. Visión: confirmar `Vision: degraded` en `--health` (PASS base) — no instalar Homebrew/llava salvo prueba opt-in.
+6. Marcar este documento → **PASS**.
 
 Solo entonces: promoción oficial a Jarvis v1.0.0 (VERSION, CHANGELOG, RELEASE_NOTES, `git tag v1.0.0`).
 
@@ -35,9 +36,9 @@ Solo entonces: promoción oficial a Jarvis v1.0.0 (VERSION, CHANGELOG, RELEASE_N
 - [ ] Montar `dist/Jarvis-1.0.0-rc.1.dmg` **o** clonar el repo
 - [ ] Python 3.12 (`brew install python@3.12`) si usas instalador standalone
 - [ ] [Ollama](https://ollama.com) instalado y en marcha
-- [ ] Modelos: `ollama pull llama3.2:3b && ollama pull nomic-embed-text` (+ `llava` si pruebas visión)
-- [ ] **Red** durante `Install.command` (pip descarga deps; el DMG ~554K es bootstrap, no runtime completo)
-- [ ] Visión: si no instalas `llava` + `tesseract`, espera `Vision: degraded` en `--health` y salta/omitir prueba de visión con nota
+- [ ] Modelos base: `ollama pull llama3.2:3b && ollama pull nomic-embed-text`
+- [ ] **Red** durante `Install.command` (pip descarga deps; el DMG es bootstrap, no runtime completo)
+- [ ] **Visión NO requerida para PASS 1.0.0** — sin llava/tesseract, espera `Vision: degraded` y continúa
 
 ## 1. Instalación sin Poetry (prioridad)
 
@@ -87,7 +88,8 @@ poetry run jarvis doctor
 | Consulta RAG / documentos | [ ] |
 | Abrir aplicación | [ ] |
 | Captura de pantalla | [ ] |
-| «¿Qué aparece en mi pantalla?» | [ ] |
+| `--health` → `Vision: degraded` (PASS base; visión opt-in) | [ ] |
+| «¿Qué aparece en mi pantalla?» | [ ] _(opcional — solo si instalaste llava+tesseract)_ |
 | Auditoría visible (GUI / DB) | [ ] |
 
 > En desarrollo, el happy path **sin wake** ya pasó vía `./scripts/release_validate.sh`.
