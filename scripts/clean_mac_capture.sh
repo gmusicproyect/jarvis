@@ -135,6 +135,14 @@ find_dmg() {
   fi
   echo
 
+  echo "===== doctor standalone (PASS/FAIL estilo) ====="
+  if command -v python3 >/dev/null 2>&1; then
+    python3 "$ROOT/scripts/jarvis_doctor_standalone.py" 2>&1 || true
+  else
+    echo "SKIPPED (no python3)"
+  fi
+  echo
+
   echo "===== NOTAS DEL OPERADOR (rellenar) ====="
   echo "checklist_result=PENDING   # PASS | FAIL | PENDING"
   echo "voice_e2e=                 # OK | FAIL"
