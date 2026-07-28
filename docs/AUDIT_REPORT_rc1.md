@@ -68,12 +68,16 @@ Warnings doctor: `llava` ausente, `tesseract` fuera de PATH, permisos macOS.
 |---|---|---|---|---|
 | **P0-1** | Bloquea | `src/`, `docs/`, `VERSION` untracked; sin tags | Backup + commit de release **sin** cambiar VERSION ni crear tag | **Cerrado** en `2f4fb71` (docs hash en `949c207`) |
 | **P0-2** | Bloquea | `--health` vs `doctor` en visión | `--health` debe sondar estado real | **Corregido** — 75 tests |
-| **P0-3** | Bloquea | `Install.command` → `mkdir .../.runtime: Read-only file system` en DMG | Instalar a App Support si origen es `/Volumes` o RO | **Corregido** en `bbffcb3` + DMG `b8b42f0f…` |
+| **P0-3** | Bloquea | `Install.command` → `mkdir .../.runtime: Read-only file system` en DMG | Instalar a App Support si origen es `/Volumes` o RO | **Corregido** — `bbffcb3` |
+| **P0-4** | Bloquea | `.app` sin `python.path` / `kLSNoExecutableErr` | Pin App Support + launcher bash + xattr | **Corregido** — `2b1ea98` |
+| **P0-5** | Bloquea | `ResilientTTS.speak(..., cancel_flag=)` → TypeError; sin respuesta hablada | Aceptar y reenviar `cancel_flag` | **Corregido** — `3fdb8f9` |
 | **P1-1** | Antes/tras 1.0.0 | llava/tesseract faltan en dev | Provisionar o declarar visión opcional en onboarding/checklist | **Decidido: visión opt-in para 1.0.0** (`Vision: degraded` = PASS base) |
 | **P1-2** | Antes/tras 1.0.0 | DMG bootstrap | Documentar red/descargas en checklist | Documentado; sha256 del artefacto en log |
 | **P1-3** | Antes/tras 1.0.0 | solo unit / cov 49% | cov + smoke E2E voz | **Parcial / permanece abierto tras PASS.** 49% unit; huecos en audio/automation/vision/gui/platform. |
-| **P1-4** | Antes/tras 1.0.0 | PASS sin hash de commit | Tras commit: re-validar y registrar hash | **Cerrado** — `741dd82` + sha256 |
+| **P1-4** | Antes/tras 1.0.0 | PASS sin hash de commit | Tras commit: re-validar y registrar hash | **Cerrado** — anclas por artefacto |
 | **P1-5** | Antes/tras 1.0.0 | Camino B: Ollama/Homebrew a nivel sistema ya presentes | Cold-start del instalador (Install.command sin Ollama/brew) no se verifica | **ABIERTO tras un PASS por Camino B.** Cierre: máquina sin Ollama ni Homebrew. Post-1.0.0. |
+| **P1-A** | Antes release público | `create_dmg.sh` horneaba `Jarvis.app` + symlink Applications con rutas de build | Quitar `.app`/symlink del DMG; solo Install.command | **Corregido** en este ciclo — validar en próximo DMG |
+| **P1-B** | Verificar en sesión | wake `preds.get("hey_jarvis", 0.0)` si la clave no coincide → score 0 | Confirmar “Hey Jarvis” activa (no solo aplauso) | **ABIERTO — verificar en instalación fresca** |
 | **P2-1** | Posterior | warnings pydantic/chromadb | Limpiar post-release | Abierto |
 | **P2-2** | Posterior | mensaje llava en inglés | i18n doctor | Abierto |
 | **P2-3** | Posterior | llama3.2:3b techo | perfil con modelo mayor opcional | Abierto / Fase futura |
