@@ -15,7 +15,14 @@ EXPECTED_SHA256="aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57
 EXPECTED_ANCHOR="741dd825567f17deb1a76d7dc9837b86fc12d24e"
 DMG="${1:-}"
 STAMP="$(date +%Y%m%d_%H%M)"
-OUT="${JARVIS_CAPTURE_OUT:-$HOME/Desktop/jarvis_clean_mac_capture_${STAMP}.txt}"
+DEFAULT_OUT="$HOME/Desktop/jarvis_clean_mac_capture_${STAMP}.txt"
+FALLBACK_OUT="/tmp/jarvis_clean_mac_capture_${STAMP}.txt"
+OUT="${JARVIS_CAPTURE_OUT:-$DEFAULT_OUT}"
+
+# Si Desktop no es escribible (sandbox / permisos), usa /tmp
+if ! touch "$OUT" 2>/dev/null; then
+  OUT="$FALLBACK_OUT"
+fi
 
 resolve_jarvis() {
   if command -v jarvis >/dev/null 2>&1; then
