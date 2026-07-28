@@ -8,13 +8,17 @@ import time
 from pathlib import Path
 
 from jarvis.utils.logging import get_logger
+import threading
 
 
 class SecurityAudit:
     def __init__(self, db_path: Path) -> None:
         self._log = get_logger("jarvis.security.audit")
         db_path.parent.mkdir(parents=True, exist_ok=True)
+        self._lock = threading.RLock()
         self._conn = sqlite3.connect(db_path, check_same_thread=False)
+        self._conn.execute("PRAGMA journal_mode=WAL;")
+        self._conn.execute("PRAGMA busy_timeout=5000;")
         self._conn.execute(
             """
             CREATE TABLE IF NOT EXISTS security_audit (

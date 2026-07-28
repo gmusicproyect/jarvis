@@ -10,6 +10,7 @@ from pathlib import Path
 import httpx
 
 from jarvis.utils.logging import get_logger
+import threading
 
 
 class OllamaEmbeddingProvider:
@@ -30,7 +31,10 @@ class OllamaEmbeddingProvider:
         self._conn: sqlite3.Connection | None = None
         if self._cache_enabled and cache_path is not None:
             cache_path.parent.mkdir(parents=True, exist_ok=True)
-            self._conn = sqlite3.connect(cache_path, check_same_thread=False)
+            self._lock = threading.RLock()
+        self._conn = sqlite3.connect(cache_path, check_same_thread=False)
+        self._conn.execute("PRAGMA journal_mode=WAL;")
+        self._conn.execute("PRAGMA busy_timeout=5000;")
             self._conn.execute(
                 """
                 CREATE TABLE IF NOT EXISTS emb_cache (

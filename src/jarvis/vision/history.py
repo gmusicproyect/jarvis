@@ -9,13 +9,17 @@ from pathlib import Path
 
 from jarvis.vision.base import VisionAnalysis
 from jarvis.utils.logging import get_logger
+import threading
 
 
 class VisionHistory:
     def __init__(self, db_path: Path) -> None:
         self._log = get_logger("jarvis.vision.history")
         db_path.parent.mkdir(parents=True, exist_ok=True)
+        self._lock = threading.RLock()
         self._conn = sqlite3.connect(db_path, check_same_thread=False)
+        self._conn.execute("PRAGMA journal_mode=WAL;")
+        self._conn.execute("PRAGMA busy_timeout=5000;")
         self._conn.execute(
             """
             CREATE TABLE IF NOT EXISTS vision_history (

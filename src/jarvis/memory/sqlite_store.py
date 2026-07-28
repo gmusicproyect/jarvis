@@ -9,6 +9,7 @@ from pathlib import Path
 
 from jarvis.memory.base import MemoryItem, MemoryKind
 from jarvis.utils.logging import get_logger
+import threading
 
 
 class SQLitePersistentMemory:
@@ -18,7 +19,10 @@ class SQLitePersistentMemory:
         self._path = db_path
         self._path.parent.mkdir(parents=True, exist_ok=True)
         self._log = get_logger("jarvis.memory.sqlite")
+        self._lock = threading.RLock()
         self._conn = sqlite3.connect(self._path, check_same_thread=False)
+        self._conn.execute("PRAGMA journal_mode=WAL;")
+        self._conn.execute("PRAGMA busy_timeout=5000;")
         self._conn.row_factory = sqlite3.Row
         self._init_schema()
         self._log.info("sqlite_ready", path=str(self._path))
@@ -94,26 +98,27 @@ class SQLitePersistentMemory:
     def search_items(
         self, query: str, kind: MemoryKind | None = None
     ) -> list[MemoryItem]:
-        like = f"%{query.strip()}%"
-        if kind is None:
-            rows = self._conn.execute(
-                """
-                SELECT * FROM memory_items
-                WHERE content LIKE ? OR IFNULL(title,'') LIKE ?
-                ORDER BY created_at DESC
-                """,
-                (like, like),
-            ).fetchall()
-        else:
-            rows = self._conn.execute(
-                """
-                SELECT * FROM memory_items
-                WHERE kind=? AND (content LIKE ? OR IFNULL(title,'') LIKE ?)
-                ORDER BY created_at DESC
-                """,
-                (kind.value, like, like),
-            ).fetchall()
-        return [self._row_to_item(r) for r in rows]
+        with self._lock:
+                like = f"%{query.strip()}%"
+                if kind is None:
+                    rows = self._conn.execute(
+                        """
+                        SELECT * FROM memory_items
+                        WHERE content LIKE ? OR IFNULL(title,'') LIKE ?
+                        ORDER BY created_at DESC
+                        """,
+                        (like, like),
+                    ).fetchall()
+                else:
+                    rows = self._conn.execute(
+                        """
+                        SELECT * FROM memory_items
+                        WHERE kind=? AND (content LIKE ? OR IFNULL(title,'') LIKE ?)
+                        ORDER BY created_at DESC
+                        """,
+                        (kind.value, like, like),
+                    ).fetchall()
+                return [self._row_to_item(r) for r in rows]
 
     def delete_item(self, item_id: str) -> bool:
         cur = self._conn.execute("DELETE FROM memory_items WHERE id=?", (item_id,))
@@ -121,20 +126,21 @@ class SQLitePersistentMemory:
         return cur.rowcount > 0
 
     def forget_matching(self, query: str) -> int:
-        like = f"%{query.strip()}%"
-        cur = self._conn.execute(
-            """
-            DELETE FROM memory_items
-            WHERE content LIKE ? OR IFNULL(title,'') LIKE ?
-            """,
-            (like, like),
-        )
-        # También limpia perfil si la clave/valor coincide
-        self._conn.execute(
-            "DELETE FROM profile WHERE key LIKE ? OR value LIKE ?", (like, like)
-        )
-        self._conn.commit()
-        return int(cur.rowcount)
+        with self._lock:
+                like = f"%{query.strip()}%"
+                cur = self._conn.execute(
+                    """
+                    DELETE FROM memory_items
+                    WHERE content LIKE ? OR IFNULL(title,'') LIKE ?
+                    """,
+                    (like, like),
+                )
+                # También limpia perfil si la clave/valor coincide
+                self._conn.execute(
+                    "DELETE FROM profile WHERE key LIKE ? OR value LIKE ?", (like, like)
+                )
+                self._conn.commit()
+                return int(cur.rowcount)
 
     def close(self) -> None:
         self._conn.close()
