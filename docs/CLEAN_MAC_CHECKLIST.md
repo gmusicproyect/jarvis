@@ -3,8 +3,8 @@
 > **Cambio oficial de criterio (2026-07-27)**  
 > Ya **no** se exige un Mac de fábrica / virgen.  
 > Se exige una **instalación fresca de Jarvis**: el producto no debe estar preinstalado
-> en esa cuenta de usuario (PASO -1). Misma Mac de desarrollo: OK si usas
-> **otra cuenta de macOS** o un wipe dirigido solo de Jarvis.
+> en esa cuenta (PASO -1). Preferir **cuenta nueva**; wipe dirigido solo si hace falta.
+> Camino B valida la app; el cold-start del instalador sin Ollama/Homebrew queda como **P1-5**.
 >
 > Objetivo: probar el DMG como lo haría un usuario nuevo, sin medir el entorno Poetry del repo.
 
@@ -24,18 +24,29 @@ ARTEFACTO BAJO VALIDACIÓN
   SHA-256:       aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
 
 QUÉ CUENTA COMO "FRESCO" (no hace falta Mac nueva)
-  - Cuenta de usuario de macOS sin Jarvis instalado, O
-  - Misma cuenta tras quitar solo residuos de Jarvis (ver wipe abajo).
-  - Ollama puede existir; lo que no debe existir es una instalación
-    previa de Jarvis (App Support / venv / ~/.jarvis).
-  - Si ya tienes llava y quieres validar P0-2, quita llava o usa otra cuenta.
+  Preferir: cuenta de macOS NUEVA (limpia por construcción).
+  Alternativa: misma cuenta + wipe dirigido + inventario (abajo).
+  - Residuos Jarvis en la cuenta deben estar vacíos (PASO -1).
+  - Ollama/Homebrew a nivel sistema PUEDEN existir: el PASS valida la app,
+    NO el cold-start completo del instalador (ver P1-5 / alcance).
 
-PASO -1 — ¿Jarvis ya está instalado aquí?
-  ls ~/Library/Application\ Support/Jarvis 2>/dev/null
-  ls ~/.jarvis 2>/dev/null
-  ls ~/Applications/Jarvis.app 2>/dev/null
+PASO -1a — Inventario de sistema (define qué NO verifica este PASS)
+  which -a ollama tesseract brew python3
+  ls -d /Applications/Ollama.app /opt/homebrew 2>/dev/null
+  ls ~/.ollama/models 2>/dev/null
+  → Pegar salida en "Alcance del PASS — no verificado" abajo.
+
+PASO -1b — Residuos Jarvis (debe salir vacío antes de instalar)
+  ls -d ~/.jarvis /Applications/Jarvis.app \
+        ~/Library/Application\ Support/*[Jj]arvis* \
+        ~/Library/Preferences/*[Jj]arvis* \
+        ~/Library/Logs/*[Jj]arvis* \
+        ~/Library/Caches/*[Jj]arvis* 2>/dev/null
   which jarvis 2>/dev/null
-  → Todo vacío / not found. Si no: wipe dirigido (abajo) o usa otra cuenta.
+  → Todo vacío. Si no: wipe o usa otra cuenta.
+  Si reutilizas la misma cuenta (TCC ya concedidos pueden falsear onboarding):
+    defaults read /Applications/Jarvis.app/Contents/Info.plist CFBundleIdentifier
+    # tccutil reset All <bundle-id>   # app cerrada
 
 PASO 0 — SHA-256 del DMG
   shasum -a 256 <ruta>/Jarvis-1.0.0-rc.1.dmg
@@ -45,8 +56,13 @@ PASO 0 — SHA-256 del DMG
 PASO 1 — Instalar desde el DMG (no desde poetry run en el repo)
   [ ] Install.command (o install_standalone_macos.sh desde JarvisSource)
   [ ] Red disponible (bootstrap descarga deps)
-  [ ] Onboarding
+  [ ] Onboarding (debe ejecutarse de verdad — no saltarlo por estado viejo)
   [ ] Permisos: micrófono (+ pantalla/accesibilidad si pruebas captura)
+
+PASO 1b — ¿Estás midiendo el DMG o el árbol de desarrollo?
+  which jarvis && readlink -f "$(which jarvis)" 2>/dev/null || which jarvis
+  → Debe apuntar a Application Support/Jarvis o al venv de la instalación.
+  → NUNCA a /Users/.../jarvis (repo de desarrollo). Si apunta al repo → FAIL.
 
 PASS BASE — todos:
   [ ] Voz E2E: Hey Jarvis → respuesta → TTS audible
@@ -57,27 +73,33 @@ PASS BASE — todos:
   [ ] jarvis --health → Vision: degraded   ← ESPERADO (visión opt-in)
   [ ] jarvis doctor → 0 fail
   [ ] Captura: sha256 + doctor + --health  (scripts/clean_mac_capture.sh)
+  [ ] Alcance del PASS rellenado (inventario PASO -1a)
+
+ALCANCE DEL PASS — no verificado (pegar inventario PASO -1a):
+  ollama_preexistente=     # si/no
+  homebrew_preexistente=   # si/no
+  tesseract_preexistente=  # si/no
+  notas=
+  → Un PASS por Camino B deja P1-5 ABIERTO (cold-start instalador).
 
 FAIL si:
   - sha256 no coincide
   - doctor con fail
   - voz E2E no completa
+  - which jarvis apunta al repo de desarrollo
   - --health dice Vision: on sin llava/tesseract (regresión P0-2)
     solo cuenta si no tenías llava preinstalado
 
-WIPE DIRIGIDO (opcional, misma Mac — NO borra tu vida)
-  # Solo residuos Jarvis; Ollama/modelos los dejas si quieres
+WIPE DIRIGIDO (solo si no puedes usar cuenta nueva)
   rm -rf ~/Library/Application\ Support/Jarvis
   rm -rf ~/.jarvis
   rm -rf ~/Applications/Jarvis.app
-  # Opcional para probar P0-2 a fondo:
-  # ollama rm llava
+  # Opcional P0-2 a fondo: ollama rm llava
 
 NO EXIGIDO PARA PASS:
-  - Mac de fábrica
-  - Borrar Homebrew / todo Ollama / fotos / mail
+  - Mac de fábrica / borrar Homebrew / todo Ollama
   - Visión funcional (llava + tesseract)
-  - Cerrar P1-3 (cobertura 49%)
+  - Cerrar P1-3 (cobertura 49%) ni P1-5 (cold-start instalador)
 
 Estado: PENDING
 Marcado por: ____________  Fecha: __________  Cuenta/Máquina: __________

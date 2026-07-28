@@ -77,7 +77,22 @@ find_dmg() {
   echo "expected_sha256=$EXPECTED_SHA256"
   echo
 
-  echo "===== PASO -1: pre-check Mac limpio ====="
+  echo "===== PASO -1a: inventario sistema (alcance PASS / P1-5) ====="
+  which -a ollama tesseract brew python3 2>&1 || true
+  ls -d /Applications/Ollama.app /opt/homebrew 2>&1 || true
+  ls "$HOME/.ollama/models" 2>&1 || true
+  echo
+
+  echo "===== PASO -1b: residuos Jarvis ====="
+  ls -d "$HOME/.jarvis" "$HOME/Applications/Jarvis.app" \
+    "$HOME/Library/Application Support/"*[Jj]arvis* \
+    "$HOME/Library/Preferences/"*[Jj]arvis* \
+    "$HOME/Library/Logs/"*[Jj]arvis* \
+    "$HOME/Library/Caches/"*[Jj]arvis* 2>&1 || true
+  which jarvis 2>&1 || true
+  echo
+
+  echo "===== PASO -1 (legacy paths) ====="
   echo "--- which ollama ---"
   which ollama 2>&1 || true
   echo "--- ollama list ---"
@@ -110,8 +125,21 @@ find_dmg() {
   echo
 
   JARVIS_CMD="$(resolve_jarvis)"
-  echo "===== jarvis binary ====="
+  echo "===== jarvis binary (¿DMG o repo de desarrollo?) ====="
   echo "jarvis_cmd=${JARVIS_CMD:-NOT_FOUND}"
+  if command -v jarvis >/dev/null 2>&1; then
+    echo -n "which_jarvis="
+    which jarvis
+    if command -v readlink >/dev/null 2>&1; then
+      echo -n "readlink="
+      readlink -f "$(which jarvis)" 2>/dev/null || readlink "$(which jarvis)" 2>/dev/null || true
+    fi
+    case "$(which jarvis 2>/dev/null)$(readlink -f "$(which jarvis)" 2>/dev/null || true)" in
+      */Users/*/jarvis/*|*/jarvis/src/*)
+        echo "WARNING: jarvis parece apuntar al árbol de desarrollo — el PASS del DMG no cuenta"
+        ;;
+    esac
+  fi
   echo
 
   if [[ -z "$JARVIS_CMD" ]]; then
@@ -152,7 +180,11 @@ find_dmg() {
   echo "screenshot_automation=     # OK | FAIL"
   echo "backup_restore=            # OK | FAIL"
   echo "vision_health_line=        # pegar la línea Vision: ..."
-  echo "machine_notes="
+  echo "ollama_preexistente="
+echo "homebrew_preexistente="
+echo "tesseract_preexistente="
+echo "P1-5_cold_start_instalador=ABIERTO_si_Camino_B"
+echo "machine_notes="
   echo
   echo "===== FIN ====="
   echo "Pega este archivo completo en el chat (Cursor/Claude) con PASS o FAIL."

@@ -11,13 +11,14 @@ Cadena:        d045037 ? 741dd82 (1 commit docs; merge-base ancestor OK)
 SHA-256:       aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
 Huella local:  ~/Desktop/jarvis_rc1_dmg.sha256
 Tests:         75 passed — tests/unit/
-Cobertura:     49% lineas (TOTAL 6598/3108 miss) — unit only; P1-3 PARCIAL y permanece abierto tras PASS de Mac limpio
+Cobertura:     49% lineas (TOTAL 6598/3108 miss) — unit only; P1-3 PARCIAL y permanece abierto tras PASS
 Doctor:        12 ok · 3 warn · 0 fail (llava, tesseract, permisos macOS)
 Health:        Vision: degraded — reporta runtime real (P0-2 cerrado)
 Vision 1.0.0:  OPT-IN — degraded = PASS del camino base (P1-1 cerrado)
 release_validate.sh: PASS (17 PASS / 1 WARN / 0 FAIL)
-Mac limpio:    CRITERIO ACTUALIZADO ? "instalación fresca de Jarvis" (no Mac de fábrica)
-               PENDING — misma Mac OK con otra cuenta o wipe dirigido de Jarvis
+Mac limpio:    Camino B — instalación fresca de Jarvis (preferir cuenta nueva)
+               PENDING — inventario sistema ? "Alcance del PASS"; P1-5 ABIERTO si Ollama/brew preexistentes
+P1-5:          Cold-start instalador no verificado bajo Camino B — ABIERTO post-PASS
 Tag v1.0.0:    no creada — bloqueada
 Fase 10:       bloqueada
 ```
