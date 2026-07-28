@@ -19,9 +19,10 @@ Phase 10: BLOCKED
 
 ```text
 ARTEFACTO BAJO VALIDACIÓN
-  Archivo:       Jarvis-1.0.0-rc.1.dmg  (612K)
-  Commit ancla:  741dd825567f17deb1a76d7dc9837b86fc12d24e
-  SHA-256:       aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
+  Archivo:       Jarvis-1.0.0-rc.1.dmg  (728K)
+  Commit ancla:  bbffcb3441cc308d9ca6f8bc228ad1382e930b9d
+  SHA-256:       b8b42f0f492f792d8bd8424be45459977bfe01a6dc0522bcc52cc924955f1763
+  Nota: sustituye 741dd82 / aebebe24… (FAIL: Install.command en DMG RO)
 
 QUÉ CUENTA COMO "FRESCO" (no hace falta Mac nueva)
   Preferir: cuenta de macOS NUEVA (limpia por construcción).
@@ -50,7 +51,7 @@ PASO -1b — Residuos Jarvis (debe salir vacío antes de instalar)
 
 PASO 0 — SHA-256 del DMG
   shasum -a 256 <ruta>/Jarvis-1.0.0-rc.1.dmg
-  Debe ser: aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
+  Debe ser: b8b42f0f492f792d8bd8424be45459977bfe01a6dc0522bcc52cc924955f1763
   Si no coincide → FAIL, no instalar.
 
 PASO 1 — Instalar desde el DMG (no desde poetry run en el repo)

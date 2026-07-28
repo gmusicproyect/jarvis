@@ -11,8 +11,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 export PATH="${HOME}/.local/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
 
-EXPECTED_SHA256="aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c"
-EXPECTED_ANCHOR="741dd825567f17deb1a76d7dc9837b86fc12d24e"
+EXPECTED_SHA256="b8b42f0f492f792d8bd8424be45459977bfe01a6dc0522bcc52cc924955f1763"
+EXPECTED_ANCHOR="bbffcb3441cc308d9ca6f8bc228ad1382e930b9d"
 DMG="${1:-}"
 STAMP="$(date +%Y%m%d_%H%M)"
 DEFAULT_OUT="$HOME/Desktop/jarvis_clean_mac_capture_${STAMP}.txt"

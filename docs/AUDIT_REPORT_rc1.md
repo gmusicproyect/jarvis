@@ -68,6 +68,7 @@ Warnings doctor: `llava` ausente, `tesseract` fuera de PATH, permisos macOS.
 |---|---|---|---|---|
 | **P0-1** | Bloquea | `src/`, `docs/`, `VERSION` untracked; sin tags | Backup + commit de release **sin** cambiar VERSION ni crear tag | **Cerrado** en `2f4fb71` (docs hash en `949c207`) |
 | **P0-2** | Bloquea | `--health` vs `doctor` en visión | `--health` debe sondar estado real | **Corregido** — 75 tests |
+| **P0-3** | Bloquea | `Install.command` → `mkdir .../.runtime: Read-only file system` en DMG | Instalar a App Support si origen es `/Volumes` o RO | **Corregido** en `bbffcb3` + DMG `b8b42f0f…` |
 | **P1-1** | Antes/tras 1.0.0 | llava/tesseract faltan en dev | Provisionar o declarar visión opcional en onboarding/checklist | **Decidido: visión opt-in para 1.0.0** (`Vision: degraded` = PASS base) |
 | **P1-2** | Antes/tras 1.0.0 | DMG bootstrap | Documentar red/descargas en checklist | Documentado; sha256 del artefacto en log |
 | **P1-3** | Antes/tras 1.0.0 | solo unit / cov 49% | cov + smoke E2E voz | **Parcial / permanece abierto tras PASS.** 49% unit; huecos en audio/automation/vision/gui/platform. |
