@@ -196,27 +196,47 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001
             check(f"{nombre} instalado", False, str(exc), critical=critical)
 
-    # Micrófono (1s)
+    # Micrófono (1s) — crítico en Mac limpio real; sin dispositivo = WARN (CI/sandbox)
     print("...probando micrófono 1s...")
     try:
         import numpy as np
         import sounddevice as sd
 
-        audio = sd.rec(int(1.0 * 16000), samplerate=16000, channels=1, dtype="float32")
-        sd.wait()
-        nivel = float(np.abs(audio).max())
-        check("Micrófono capta señal", nivel > 0.0005, f"nivel={nivel:.5f}")
+        devices = sd.query_devices()
+        inputs = [d for d in devices if d.get("max_input_channels", 0) > 0]
+        if not inputs:
+            check(
+                "Micrófono capta señal",
+                False,
+                "sin dispositivos de entrada (CI/sandbox?)",
+                critical=False,
+            )
+        else:
+            audio = sd.rec(int(1.0 * 16000), samplerate=16000, channels=1, dtype="float32")
+            sd.wait()
+            nivel = float(np.abs(audio).max())
+            check("Micrófono capta señal", nivel > 0.0005, f"nivel={nivel:.5f}")
     except Exception as exc:  # noqa: BLE001
-        check("Micrófono capta señal", False, str(exc))
+        check("Micrófono capta señal", False, str(exc), critical=False)
 
-    # CLI jarvis si está en PATH / venv
+    # CLI jarvis si está en PATH / venv / poetry
     jarvis_bin = shutil.which("jarvis")
     venv_jarvis = HOME / "Library/Application Support/Jarvis/venv/bin/jarvis"
-    if jarvis_bin or venv_jarvis.is_file():
-        cmd = [jarvis_bin] if jarvis_bin else [str(venv_jarvis)]
+    poetry_jarvis: list[str] | None = None
+    if shutil.which("poetry") and (ROOT / "pyproject.toml").is_file():
+        poetry_jarvis = ["poetry", "run", "jarvis"]
+
+    if jarvis_bin or venv_jarvis.is_file() or poetry_jarvis:
+        if jarvis_bin:
+            cmd = [jarvis_bin]
+        elif venv_jarvis.is_file():
+            cmd = [str(venv_jarvis)]
+        else:
+            cmd = poetry_jarvis  # type: ignore[assignment]
         try:
             proc = subprocess.run(
                 [*cmd, "--health"],
+                cwd=ROOT,
                 capture_output=True,
                 text=True,
                 timeout=60,
@@ -228,7 +248,14 @@ def main() -> int:
             check(
                 "jarvis --health ejecuta",
                 proc.returncode == 0,
-                out.splitlines()[-1][:80] if out else f"rc={proc.returncode}",
+                next(
+                    (
+                        ln.strip()
+                        for ln in out.splitlines()
+                        if ln.strip().startswith("Jarvis ")
+                    ),
+                    f"rc={proc.returncode}",
+                )[:80],
             )
             check(
                 "jarvis --health no miente (P0-2)",
