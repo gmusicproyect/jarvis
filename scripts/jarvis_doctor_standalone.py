@@ -265,7 +265,14 @@ def main() -> int:
             check(
                 "Vision degraded/off esperado sin llava",
                 degraded_ok or has_llava,
-                "buscar línea Vision: en --health",
+                next(
+                    (
+                        ln.strip()
+                        for ln in out.splitlines()
+                        if "Vision:" in ln
+                    ),
+                    "sin línea Vision",
+                )[:100],
                 critical=False,
             )
         except Exception as exc:  # noqa: BLE001
