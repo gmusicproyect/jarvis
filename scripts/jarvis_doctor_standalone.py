@@ -24,10 +24,50 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-HOME = Path.home()
-ROOT = Path(__file__).resolve().parents[1]
-CRITICAL: list[bool] = []
-WARNINGS = 0
+def prefer_python() -> list[str]:
+    """Usa el Python del venv de Jarvis / Poetry si existe (no el system bare)."""
+    candidates = [
+        HOME / "Library/Application Support/Jarvis/venv/bin/python",
+        ROOT / ".runtime" / "venv" / "bin" / "python",
+        ROOT / ".venv" / "bin" / "python",
+    ]
+    for c in candidates:
+        if c.is_file():
+            return [str(c)]
+    # poetry
+    if shutil.which("poetry") and (ROOT / "pyproject.toml").is_file():
+        try:
+            proc = subprocess.run(
+                ["poetry", "env", "info", "-p"],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            env_p = (proc.stdout or "").strip()
+            py = Path(env_p) / "bin" / "python"
+            if py.is_file():
+                return [str(py)]
+        except Exception:  # noqa: BLE001
+            pass
+    return [sys.executable]
+
+
+def reexec_in_project_python() -> None:
+    """Si este intérprete no tiene deps de voz, reintenta con el venv del proyecto."""
+    if os.environ.get("JARVIS_DOCTOR_REEXEC") == "1":
+        return
+    try:
+        import faster_whisper  # noqa: F401
+        import sounddevice  # noqa: F401
+        return
+    except ImportError:
+        pass
+    target = prefer_python()
+    if Path(target[0]).resolve() == Path(sys.executable).resolve():
+        return
+    os.environ["JARVIS_DOCTOR_REEXEC"] = "1"
+    os.execv(target[0], [*target, str(Path(__file__).resolve()), *sys.argv[1:]])
 
 
 def check(nombre: str, ok: bool, detalle: str = "", *, critical: bool = True) -> None:
@@ -227,6 +267,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     try:
+        reexec_in_project_python()
         raise SystemExit(main())
     except urllib.error.URLError as exc:
         print(f"ERROR de red: {exc}", file=sys.stderr)
