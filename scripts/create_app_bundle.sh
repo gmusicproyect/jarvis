@@ -48,6 +48,8 @@ chmod +x "$RES/resolve_python.sh"
 
 PIN_PY=""
 export PATH="${HOME}/.local/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
+APP_SUPPORT_PY="${HOME}/Library/Application Support/Jarvis/venv/bin/python"
+APP_SUPPORT_PIN="${HOME}/Library/Application Support/Jarvis/python.path"
 
 _is_portable_python() {
   case "$1" in
@@ -58,7 +60,15 @@ _is_portable_python() {
   return 0
 }
 
-if [[ -x "$ROOT/.runtime/venv/bin/python" ]]; then
+# Preferir venv de instalación standalone (Application Support) — es el camino DMG
+if [[ -x "$APP_SUPPORT_PY" ]]; then
+  PIN_PY="$APP_SUPPORT_PY"
+elif [[ -f "$APP_SUPPORT_PIN" ]]; then
+  CAND="$(tr -d '[:space:]' < "$APP_SUPPORT_PIN")"
+  if [[ -x "$CAND" ]] && _is_portable_python "$CAND"; then
+    PIN_PY="$CAND"
+  fi
+elif [[ -x "$ROOT/.runtime/venv/bin/python" ]]; then
   PIN_PY="$ROOT/.runtime/venv/bin/python"
 elif command -v poetry >/dev/null 2>&1; then
   ENV_P="$(cd "$ROOT" && poetry env info -p 2>/dev/null || true)"
@@ -66,12 +76,12 @@ elif command -v poetry >/dev/null 2>&1; then
     PIN_PY="$ENV_P/bin/python"
   fi
 fi
+
 if [[ -n "$PIN_PY" ]]; then
   printf '%s\n' "$PIN_PY" > "$RES/python.path"
   if mkdir -p "$ROOT/.runtime" 2>/dev/null; then
     printf '%s\n' "$PIN_PY" > "$ROOT/.runtime/python.path"
   fi
-  # Siempre pin en Application Support (sobrevive al desmontar el DMG)
   mkdir -p "${HOME}/Library/Application Support/Jarvis"
   printf '%s\n' "$PIN_PY" > "${HOME}/Library/Application Support/Jarvis/python.path"
   echo "Python fijado: $PIN_PY"
@@ -80,8 +90,9 @@ else
   rm -f "$RES/python.path"
 fi
 
+# Launcher: bash (Launch Services es más fiable que zsh script en .app)
 cat > "$MACOS/Jarvis" <<EOF
-#!/bin/zsh
+#!/bin/bash
 set -euo pipefail
 export PATH="\$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:\$PATH"
 export JARVIS_ROOT="$ROOT"
@@ -92,25 +103,34 @@ PY=""
 if [[ -f "\$RES/python.path" ]]; then
   PY="\$(tr -d '[:space:]' < "\$RES/python.path")"
 fi
-
+if [[ -z "\$PY" || ! -x "\$PY" ]]; then
+  if [[ -f "\$HOME/Library/Application Support/Jarvis/python.path" ]]; then
+    PY="\$(tr -d '[:space:]' < "\$HOME/Library/Application Support/Jarvis/python.path")"
+  fi
+fi
 if [[ -z "\$PY" || ! -x "\$PY" ]]; then
   resolve="\$RES/resolve_python.sh"
   [[ -x "\$resolve" ]] || resolve="\$JARVIS_ROOT/scripts/resolve_python.sh"
   if ! PY="\$("\$resolve")"; then
-    osascript -e 'display dialog "Jarvis no encuentra Python. Ejecuta ./scripts/install_standalone_macos.sh" buttons {"OK"} default button 1'
+    osascript -e 'display dialog "Jarvis no encuentra Python. Ejecuta Install.command otra vez." buttons {"OK"} default button 1'
     exit 1
   fi
 fi
 
 export PYTHONPATH="\$JARVIS_ROOT/src\${PYTHONPATH:+:\$PYTHONPATH}"
 if ! "\$PY" -c "import jarvis" 2>/dev/null; then
-  osascript -e 'display dialog "Jarvis no está instalado en este Python. Ejecuta ./scripts/install_standalone_macos.sh" buttons {"OK"} default button 1'
+  osascript -e 'display dialog "Jarvis no está instalado en este Python. Ejecuta Install.command otra vez." buttons {"OK"} default button 1'
   exit 1
 fi
 
 exec "\$PY" -m jarvis gui
 EOF
 chmod +x "$MACOS/Jarvis"
+# PkgInfo ayuda a Launch Services a reconocer el bundle
+printf 'APPLJARS' > "$CONTENTS/PkgInfo"
+# Limpiar cuarentena / provenance que a veces dispara kLSNoExecutableErr
+xattr -cr "$APP_DIR" 2>/dev/null || true
+
 
 cat > "$RES/Permissions.rtf" <<'EOF'
 {\rtf1\ansi\deff0
