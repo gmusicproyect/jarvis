@@ -15,6 +15,12 @@ ARTEFACTO BAJO VALIDACIÓN
   Commit ancla:  741dd825567f17deb1a76d7dc9837b86fc12d24e
   SHA-256:       aebebe2478f51b105f94cd005d3b5c486f68829520f2a3069498357819d7e57c
 
+PASO -1 — ¿ES REALMENTE MAC LIMPIO?
+  which ollama; ollama list 2>/dev/null; which tesseract; ls ~/.jarvis 2>/dev/null
+  Todo vacío / not found. Si ya hubo Ollama+llava u otra instalación Jarvis,
+  NO es Mac limpio: limpia, o el criterio FAIL de P0-2 (--health Vision: on
+  sin deps) no cuenta en esa máquina.
+
 PASO 0 — EN EL MAC LIMPIO, ANTES DE INSTALAR
   shasum -a 256 <ruta>/Jarvis-1.0.0-rc.1.dmg
   Debe coincidir carácter por carácter. Si no coincide → FAIL, no instalar.
@@ -37,15 +43,27 @@ PASS BASE — requiere TODOS:
   [ ] jarvis --health → "Vision: degraded"   ← ESPERADO. No es fallo.
   [ ] jarvis doctor → 0 fail
 
+CAPTURAR EN LA SESIÓN (para RELEASE_VALIDATION_LOG, PASS o FAIL):
+  [ ] sha256 confirmado en esa máquina
+  [ ] salida de jarvis doctor
+  [ ] salida de jarvis --health
+
 FAIL si:
   - El sha256 no coincide
   - Cualquier "fail" en doctor
   - El camino de voz no completa de extremo a extremo
   - --health reporta "Vision: on" sin llava ni tesseract  ← regresión de P0-2
+    (solo válido si PASO -1 confirmó máquina limpia)
 
-FUERA DE ALCANCE (no bloquea el PASS):
+SI FAIL O SESIÓN INTERRUMPIDA:
+  Estado = FAIL o PENDING. Nunca "casi PASS".
+  Un arreglo genera commit nuevo → DMG nuevo → sha256 nuevo.
+  No reutilices esta tarjeta con hash viejo y casillas nuevas.
+
+FUERA DE ALCANCE (no bloquea el PASS de 1.0.0):
   - Visión funcional (opt-in, post-1.0.0)
   - Tiempo y tamaño de descarga de modelos
+  - Cerrar P1-3 (cobertura 49%) — sigue abierto tras un PASS
 
 Estado: PENDING
 Marcado por: ____________  Fecha: __________  Máquina: __________
