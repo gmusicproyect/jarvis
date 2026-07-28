@@ -46,6 +46,8 @@ rsync -a \
 cat > "$STAGE/Install.command" <<'EOF'
 #!/bin/zsh
 set -euo pipefail
+# El DMG es de solo lectura: install_standalone copia a
+# ~/Library/Application Support/Jarvis y crea el venv ahí.
 HERE="$(cd "$(dirname "$0")" && pwd)"
 cd "$HERE/JarvisSource"
 chmod +x scripts/*.sh
@@ -61,16 +63,19 @@ Jarvis ${VERSION}
 
 INSTALACIÓN EN MAC LIMPIO (sin Poetry):
 
-1. Doble clic en Install.command  (o arrastra JarvisSource y ejecuta
-   ./scripts/install_standalone_macos.sh).
-2. Se crea ~/Applications/Jarvis.app con venv propio.
+1. Doble clic en Install.command
+   (copia el código fuera del DMG a Application Support; el volumen
+   es de solo lectura — no intentes escribir en JarvisSource del DMG).
+2. Se crea ~/Applications/Jarvis.app + venv en
+   ~/Library/Application Support/Jarvis/venv
+   y CLI en ~/.local/bin/jarvis
 3. Concede permisos: Micrófono, Pantalla, Accesibilidad, Notificaciones.
 4. Instala Ollama: https://ollama.com
    ollama pull llama3.2:3b
    ollama pull nomic-embed-text
 5. Primera vez: onboarding automático al abrir la GUI
-   o: ~/Library/Application\\ Support/Jarvis/venv/bin/jarvis onboard
-6. Diagnóstico: .../venv/bin/jarvis doctor
+   o: jarvis onboard
+6. Diagnóstico: jarvis doctor
 
 Gatekeeper (RC sin firma):
   clic derecho → Abrir en Jarvis.app / Install.command

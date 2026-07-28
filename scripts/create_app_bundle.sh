@@ -68,8 +68,12 @@ elif command -v poetry >/dev/null 2>&1; then
 fi
 if [[ -n "$PIN_PY" ]]; then
   printf '%s\n' "$PIN_PY" > "$RES/python.path"
-  mkdir -p "$ROOT/.runtime"
-  printf '%s\n' "$PIN_PY" > "$ROOT/.runtime/python.path"
+  if mkdir -p "$ROOT/.runtime" 2>/dev/null; then
+    printf '%s\n' "$PIN_PY" > "$ROOT/.runtime/python.path"
+  fi
+  # Siempre pin en Application Support (sobrevive al desmontar el DMG)
+  mkdir -p "${HOME}/Library/Application Support/Jarvis"
+  printf '%s\n' "$PIN_PY" > "${HOME}/Library/Application Support/Jarvis/python.path"
   echo "Python fijado: $PIN_PY"
 else
   echo "AVISO: sin python.path portable. En Mac limpio ejecuta ./scripts/install_standalone_macos.sh"
